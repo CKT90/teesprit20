@@ -31,7 +31,7 @@ responsive CSS layout build <br>
 <img src="https://res.cloudinary.com/dvmad09wh/image/upload/v1575789988/checkout_page_cujcuu.jpg" width="70%" height="70%" >
 
 **Admin Order Management Page: (based on ReactJS with Material UI)** <br>
-<img src="https://res.cloudinary.com/dvmad09wh/image/upload/v1575789988/order_management_page_ch6xde.jpg" width="70%" height="70%" >
+<img src="https://res.cloudinary.com/dvmad09wh/image/upload/v1590320994/order_management_ttpe3m.png" width="70%" height="70%" >
 
 **Order Panel Overview:**<br>
 <img src="https://res.cloudinary.com/dvmad09wh/image/upload/v1590310719/statistics_n2qt3k.png" width="70%" height="70%" >
