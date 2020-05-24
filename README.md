@@ -4,7 +4,7 @@
 
 production link: https://teesprit.herokuapp.com <br>
 
-Ecommerce mockup build with stacks of: <br>
+Online s mockup build with stacks of: <br>
 Ruby on Rails <br>
 CSS/HTML <br>
 Javascript <br>
@@ -32,6 +32,9 @@ responsive CSS layout build <br>
 
 **Admin Order Management Page: (based on ReactJS with Material UI)** <br>
 <img src="https://res.cloudinary.com/dvmad09wh/image/upload/v1575789988/order_management_page_ch6xde.jpg" width="70%" height="70%" >
+
+**Order Panel Overview:**<br>
+<img src="https://res.cloudinary.com/dvmad09wh/image/upload/v1590310719/statistics_n2qt3k.png" width="70%" height="70%" >
 
 **Mobile View:**  <br>
 <img src="https://res.cloudinary.com/dvmad09wh/image/upload/v1576834544/ezgif-1-99b72aba6223_hlyaoy.gif" width="30%" height="30%" >
