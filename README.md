@@ -1,6 +1,5 @@
 
-**Mockup Online Store Ecommerce** <br>
-**Repository view upon request** <br>
+**Mockup Online Store** <br>
 
 production link: https://teesprit.herokuapp.com <br>
 
@@ -15,7 +14,7 @@ VueJS <br>
 Image Hosting with Cloudinary <br>
 SMTP with Gmail <br>
 
-built in carting system, admin management panel, payment option with Paypal. <br>
+built in carting system, admin management panel, payment option with Stripe / Paypal. <br>
 responsive CSS layout build <br>
 
 **Quick walkthrough:**<br>
