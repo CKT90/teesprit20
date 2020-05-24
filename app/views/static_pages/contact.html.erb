@@ -1,0 +1,43 @@
+<% provide(:title, "Contact") %>
+
+<div class="container contact_page">
+<div class=" col-lg-4 col-lg-offset-4">
+<h1>Contact</h1>
+<p>
+	Need Assistance? </br>
+	Found a bug in our website? </br>
+	Problem with orders?</br>
+    Returning item?</br>
+	Let us know! </br>
+	We will get back to you shortly!</br>
+
+	
+    <%= form_for @message, :method => :POST do |f| %>
+    <%= render "shared/error_messages", :target => @message %>
+
+    <%= f.label :sender_email, 'Email' %><br>
+    <%= f.text_field :sender_email, class: 'form-control' %>
+
+    <%= f.label :subject %><br>
+    <%= f.text_field :subject, class: 'form-control' %>
+
+    <%= f.label :content %><br>
+    <%= f.text_area :content, rows: 3, class: 'form-control' %>
+
+
+    <% if current_user.nil? %>
+    <%= f.hidden_field :user_id, :value => "0" %>
+    
+    <% else %>
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+    <% end %>
+
+          </br>  
+    <%= f.submit 'Send Message', class: 'help_submit_button' %>
+
+<% end %>
+
+
+</p>
+</div>
+</div>

@@ -1,0 +1,137 @@
+<% provide(:title, "Home")%>
+
+
+<div class="home">
+  <div class="image_switch">
+    <div id="carousel-change" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#carousel-change" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-change" data-slide-to="1"></li>
+        <li data-target="#carousel-change" data-slide-to="2"></li>
+      </ol>
+
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner">
+        <div class="item active item_1">
+          <a href="#"></a>
+          <div class="carousel-caption d1">
+          <h1><span class="des11">Graphic Tees </span></h1>
+          <span class="des12"> A simple Malaysia store, to sell local graphic printed tee with custom drawn arts.  </span>
+          <span class="des13"> <%= link_to "Store", store_path, class: 'btn h-btn' %></span>
+          </div>
+        </div>
+
+        <div class="item item_2">
+          <a href="#"></a>
+          <div class="carousel-caption d1">
+          <span class="des11"> About Our Store </span><br>
+          <span class="des12"> Teesprit aims to produce locally designed graphic tee, and spread inspirations. </span>
+          <span class="des13"> <%= link_to "About Us", about_path, class: 'btn btn-success' %></span>
+          </div>
+        </div>
+
+        <div class="item item_3">
+          <a href="#"></a>
+          <div class="carousel-caption d1">
+          <span class="des11"> Free Delivery </span><br>
+          <span class="des12"> Free delivery in Klang Valley and 7 days no question return. Terms and conditions applied. </span>
+          <span class="des13"> <%= link_to "Details", refund_path, class: 'btn h-btn' %></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <a class="left carousel-control" href="#carousel-change" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+      </a>
+      <a class="right carousel-control" href="#carousel-change" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+      </a>
+    </div> <!-- Carousel -->
+  </div>
+
+
+  <div class="new_release container" style="text-align: center;">
+      
+        <% @product.each do | product | %>  
+        <div style=" display: inline-block; margin: 20px;" %>
+          <%= react_component("fe/home/ImageCard", {image: product.images.first.image_url, title: product.title, description: truncate(product.description, length: 100), id: product.number}) %>
+         </div>
+        <% end %>
+     
+
+  </div>
+
+
+<div class="container product_exp">
+  <div class="col-lg-5 col-md-10 exp_text">
+    <p> 
+     <span style="font-weight: bold;">Teesprit</span> aims to produce locally designed graphic tee, and spread inspirations. Be different when wearing our tees. Follow us through social medias to keep updated on our progresses. We hope to spark like minded creative people and inspire all in our journey, as well as adding a little variation into the local apparel line. "Inspire Something"
+     <br>
+     <br>
+     <%= link_to "To Store", store_path, class: 'btn btn-success' %>
+    </p>
+  </div>
+</div>
+ 
+<div class="container guide">
+  <div class="col-lg-4 col-xs-12">
+    <%= image_tag("reg.png", alt: "local graphic tee") %>
+    <p>Register as user to purchase and track order in this page. Alternatively browse and purchase as guest user without registration and track order through email.</p>
+  </div>
+
+  <div class="col-lg-4 col-xs-12">
+    <%= image_tag("pur.png", alt: "local graphic tee") %>
+    <p>Browse through selections in store, with various size and both gender cutting available. Only 5 units available for each design/print variant.</p>
+  </div>
+
+  <div class="col-lg-4 col-xs-12">
+    <%= image_tag("disti.png", alt: "local graphic tee") %>
+    <p>Checkout with two methods, COD (available in Klang Valley only) and Bank-in delivery. <%= link_to 'Click here', payment_path, style: 'font-weight:bold; text-decoration:underline; color: #ff8c00;' %> for more details on payment method. Free delivery in Klang Valley area and 7 days no question return. <%= link_to 'More details here.', refund_path, style: 'font-weight:bold; text-decoration:underline; color: #ff8c00;' %></p>
+  </div>
+</div>
+
+
+<div class="container home_link">
+  <div class="col-lg-3 col-xs-6" style="position: relative; display: inline-block;">
+    <a class="home_button fblink" href="https://www.facebook.com/The-Everything-Apparel-545747722426741/"><span class="blue">Facebook</span></a>
+  </div>
+  <div class="col-lg-3 col-xs-6" style="position: relative; display: inline-block;">
+    <a class="home_button iglink" href="https://www.instagram.com/teesprit.my/?hl=en"><span class="red">Instagram</span></a>
+  </div>
+  <div class="col-lg-3 col-xs-6" style="position: relative; display: inline-block;">
+    <a class="home_button taslink" href="https://theeveythingapparel.threadless.com"><span class="orange">Threadless Artist Shop</span></a>
+  </div>
+  <div class="col-lg-3 col-xs-6" style="position: relative; display: inline-block;">
+    <a class="home_button s6link" href="https://society6.com/teesprit/s?q=popular+apparel"><span class="purple">Society6 Shop</span></a>
+  </div>
+</div>
+
+
+
+  <script type="text/javascript">
+  var windowWidth = $(document).width();
+  var os = $('.image_switch').offset().top;
+  var h = 200;
+  var $w = $(window).scroll(function() {
+
+
+      if($w.scrollTop() > os +  h){
+        $('.head.home_header').removeClass('home_header');
+        $('.head').addClass('header');  
+        $('a.login_button').removeClass('ghost-button-transition'); 
+      }
+      else {   
+        $('.head.header').removeClass('header');
+        $('.head').addClass('home_header'); 
+        $('a.login_button').addClass('ghost-button-transition');
+      }
+    
+  });
+  </script>
+  </div>
+
+
+
+

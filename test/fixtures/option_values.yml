@@ -1,0 +1,41 @@
+white:
+  position: 1
+  name: white
+  presentation: white
+  option_type: color
+
+black:
+  position: 2
+  name: black
+  presentation: black
+  option_type: color
+
+male:
+  position: 1
+  name: male
+  presentation: male 
+  option_type: gender
+
+female:
+  position: 2
+  name: female
+  presentation: female
+  option_type: gender
+
+small:
+  position: 1
+  name: small
+  presentation: small
+  option_type: size
+
+medium:
+  position: 2
+  name: medium
+  presentation: medium 
+  option_type: size
+
+large:
+  position: 3
+  name: large
+  presentation: large
+  option_type: size

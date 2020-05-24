@@ -1,0 +1,115 @@
+<% provide(:title, @product.title) %>
+
+
+<div class="product_view">
+ <div class="container ">
+ <h1 style="margin: 0px 0px 20px 20px;"> <%= link_to "Store", store_url, class: 'product_top_link', style: 'color: #1e98b2;' %> > <%= @product.title %></h1>
+  <div class="container product_whole">
+
+  <div class="col-lg-12 col-xs-12 col_top">
+    <% cache @product do %>
+      <div class="col-lg-6 col-md-6 col-sm-8 col-xs-9 col_class">
+        <div class="thumbnail browse_show_image">
+          <% if @product.images.any? %>
+            <%= image_tag @product.images.first.image_url(:show) %>
+          <% else %>
+            <%= image_tag("img2.png", alt: "Upload Image Here!") %>
+          <%end%>
+        </div>
+      </div>
+
+      <div class="col-lg-2 col-md-2 col-sm-4 col-xs-3">
+        <div class="other_images">
+            <% @product.images.each do |product_images| %>
+              <%= image_tag product_images.image_url(:show) %>
+            <% end %>
+  <% if false %>
+          <% @product.variants.each do |variant| %>
+              <% variant.images.each do |variant_images| %>
+               <%= image_tag variant_images.image_url(:show) %>
+              <% end %>
+            <% end %>
+  <%end%>
+        </div>
+      </div>
+
+
+
+      <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 col_class">
+
+        <div class="product_details">
+          <div class="product_show_title">
+            <%= @product.title%>
+          </div>
+          <div class="product_show_description">
+            <%= @product.description %>
+          </div>
+          <div class="product_show_price">
+            <span id="price_info"><%= number_to_currency(@product.variants.first.price, unit: "RM") %> </span>
+          </div>
+          <span style="color: #1e98b2;"><%= link_to "Click here tee size details!", details_path, target: :_blank %></span>
+        </div>
+
+        <%= form_for(:line_item, remote:true, authenticity_token: true, url: addcart_path) do |f| %>
+          <%= f.hidden_field :product_id, :value => @product.id %>
+          <% @product.option_types.each do |option_type| %>
+
+            <% if ProductOptionType.find_by(option_type_id: option_type.id, product_id: @product.id).hidden? %>
+              <p></p>
+            <% else %>
+              <div class="POT_container">
+              <%= label :presentation, option_type.presentation %>
+              <%= hidden_field_tag "#{option_type.name}_toggle"%>
+
+            <% if option_type.color == true %>
+              <%= f.collection_select 'option_value_ids', option_type.option_values, :id, :name,
+                {}, { class: "colorized", name: 'line_item[option_value_ids][]', :onchange=> "update_product()" } %>
+            <% else %>
+              <%= f.collection_select 'option_value_ids', option_type.option_values, :id, :name,
+                {}, { class: "normal_select", name: 'line_item[option_value_ids][]', :onchange=> "update_product()" } %>
+            <% end %>
+            </div>
+
+            <% end %>
+          <% end %>   
+
+          <div class="POT_container">
+            <div id="quantity_selection">
+              <div class="quantity-down">-</div>
+                <%= number_field_tag 'line_item[quantity]', min: 1, step: 1, class: "form-control" %>
+              <div class="quantity-up">+</div>
+            </div>
+
+            <p id="quantity_info" style=""></p>
+          </div>
+          <div style="clear:both;"></div>
+  
+          <%= f.submit "Add to Cart",id: "selection_submit"  %>
+        <% end %>
+
+        <div class="variant_desc">
+          <p id="variant_description"></p>
+        </div>
+
+        
+
+        <% if logged_in? %>
+        <%= link_to "Out of Stock? let us know if you are interested, click here!", contact_path(:content => "Hey, i'm interested in this item #{@product.number}. Let me know if this is available again soon!", :subject => "Availability of item #{@product.number}, #{@product.title}.", :sender_email => current_user.email), :method => :get, class: 'stockup_link' %>
+        <% else %>
+        <% end %>
+
+        <script type="text/javascript">
+          $(document).on("turbolinks:load", function() {
+            if (!($(".products.show").length > 0)) {
+              return;
+            }
+            update_product();
+        });
+        </script>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+</div>
+

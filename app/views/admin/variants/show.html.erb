@@ -1,0 +1,112 @@
+<p id="notice"><%= notice %></p>
+<%= render "shared/error_messages", :target => @variant %>
+<p>
+  <strong>SKU:</strong>
+  <%= @variant.SKU %>
+</p>
+
+<%if @variant.images.any? %>
+<p>
+  <strong>Image url:</strong>
+  <%= image_tag @variant.images.first.image_url(:thumb) %>
+</p>
+
+<% else %>
+  <p></p>
+ <%end%>
+
+<li><%= @variant.count_on_hand.to_s %></li>
+
+<p>
+  <strong>Price:</strong>
+  <%= number_to_currency(@variant.price, unit: "RM") %>
+</p>
+
+
+
+<%= link_to "edit", edit_admin_product_variant_path( @product, @variant) %>
+
+
+
+<% if false %>
+<%= link_to "delete(commented)", [:admin, @product, @variant], method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>
+
+
+--------------------------
+
+<% provide(:title, 'Variants') %>
+
+    <span class="product_id_edit">Variant SKU: <%= @variant.SKU %></span>
+
+    <span class="manage_button">
+      <%= link_to admin_product_variant_management_path(@product), title: "Manage_Variant", data: {toggle: 'tooltip', placement: "top" }  do %>
+        <i class="btn btn-success glyphicon glyphicon-arrow-left"></i>
+      <% end %>
+
+      <%= link_to "Back To Product", edit_admin_product_path(@product), class: "btn btn-primary" %>
+    </span>
+
+    <div class="variant_admin_page">
+      <div class="col-lg-12">
+      <%= render "shared/error_messages", :target => @variant %>
+
+        <%= form_for [:admin, @product, @variant], :html => {multipart:true} do |f| %>
+
+          <div class="col-lg-6">
+
+            <%= f.label :SKU, 'SKU' %>
+            <%= f.text_field :SKU, class: "form-control" %>
+
+            <%= f.label :count_on_hand, 'Stock' %>
+            <%= number_field_tag 'variant[count_on_hand]', @variant.count_on_hand, min: 0, step: 1, class: "form-control" %>
+
+            <%= f.label :price, 'Price (RM)' %>
+            <%= f.text_field :price, class: 'form-control' %>
+
+            <%= f.label :cost_price, 'Cost (RM)' %>
+            <%= f.text_field :cost_price, class: 'form-control' %>
+
+            <%= f.label :description %>
+            <%= f.text_area :description, :rows => 6, class: 'form-control' %>
+
+          </div>
+
+
+        <div class="col-lg-5">
+          <div class="fucker2">
+
+            <div id="variant_image">
+              <% if @images.any? %>
+                <%= render partial: "admin/variants/image", locals: {image: @images} %>
+              <% else %>
+               <p style="background-color: #90c5c7; padding: 5px 10px 5px 10px; display: inline-block; color: #fff;"> No image, upload now! </p>
+              <% end %>
+            </div>
+
+            <div id="image_bar">
+            </div>
+
+          </div>
+
+          <div class="fucker">
+            <%= f.fields_for :images, @variant.images.build, :html => {multipart:true} do |builder| %>
+              <%= render 'new_image', f: builder %>
+            <% end %>
+            <p class="image_description"> First picture will be displayed to represent product. Images can be dragged to update position.</p>
+          </div>
+        </div>
+
+          <%= f.submit "Update variant", class: "btn btn-primary submit_edit_variant" %>
+
+        <% end %>
+
+      </div>
+      </div>
+
+
+  <script id="template-upload" type="text/x-tmpl">
+    <div class="upload">
+      <div class="progress"><div class="bar" style="width: 0%"></div></div>
+    </div>
+  </script>

@@ -1,0 +1,16 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+size:
+  name: size
+  presentation: size
+  position: 1
+
+color:
+  name: color
+  presentation: color
+  position: 1
+
+gender:
+  name: gender
+  presentation: gender
+  position: 1

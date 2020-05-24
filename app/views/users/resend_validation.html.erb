@@ -1,0 +1,19 @@
+<% provide(:title, "Resend Validation") %>
+<div class="password_reset">
+
+
+	<div class="col-lg-4 col-lg-offset-4 col-sm-12 ">
+		<h1>Resend Validation</h1>
+
+		<%= form_for(:account, url: resend_va_path) do |f| %>
+		<%= f.label :email %>
+		<%= f.email_field :email, class: 'form-control' %>
+		<%= f.submit "Submit", class: "btn btn-primary" %>
+		<% end %>
+<br>
+<br>
+<br>
+
+	</div>
+</div>
+

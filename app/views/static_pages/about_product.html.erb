@@ -1,0 +1,153 @@
+<% provide(:title, Product) %>
+
+<div>
+
+<div class="chart container">
+<h1>Tee Size Chart</h1>
+
+<span class="chart_table col-lg-7 col-md-7 col-sm-7 col-xs-12">
+<table class="table men_size_table">
+  <thead style="background-color: #353535; color: #fff;" >
+    <tr>
+      <th class="th_chart">Men's Size</th>
+      <th>Shoulder</th>
+      <th>Chest</th>
+      <th>Short Sleeve Length</th>
+      <th>Body</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">S</th>
+      <td>16"</td>
+      <td>38"</td>
+      <td>7"</td>
+      <td>26"</td>
+    </tr>
+    <tr>
+      <th scope="row">M</th>
+      <td>17"</td>
+      <td>40"</td>
+      <td>7.5"</td>
+      <td>27"</td>
+    </tr>
+    <tr>
+      <th scope="row">L</th>
+      <td>18"</td>
+      <td>42"</td>
+      <td>8"</td>
+      <td>28"</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<table class="table women_size_table">
+  <thead style="background-color: #353535; color: #fff;" >
+    <tr>
+      <th class="th_chart">Women's Size</th>
+      <th>Shoulder</th>
+      <th>Chest</th>
+      <th>Short Sleeve Length</th>
+      <th>Body</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">S</th>
+      <td>13"</td>
+      <td>32"</td>
+      <td>6"</td>
+      <td>23"</td>
+    </tr>
+    <tr>
+      <th scope="row">M</th>
+      <td>14"</td>
+      <td>34"</td>
+      <td>6.5"</td>
+      <td>24"</td>
+    </tr>
+    <tr>
+      <th scope="row">S</th>
+      <td>15"</td>
+      <td>36"</td>
+      <td>6.5"</td>
+      <td>25"</td>
+    </tr>
+  </tbody>
+</table>
+</span>
+<span class="chart_image col-lg-5 col-md-5 col-sm-5 col-xs-12">
+<%= image_tag("chart.png", alt: "tee size chart")%>
+</span>
+
+</div>
+
+<!-- testing VueJS framework -->
+
+<div style="background-color: #edda82; padding: 15px;">
+
+<% if current_user && current_user.admin? %>
+<div id='content' v-cloak>
+  <p> {{ title }} </p>
+  <p> {{ subtitle('Teesprit') }} </p>
+  <p> Watch some videos here in our <a :href="url">Youtube</a> channel. </p> <!-- ":href" short for "v-bind:href" -->
+  <input type="text" :value="area" @keyup="updateArea"> 
+  <input type="text" v-model="postcode">
+  <p> {{ quantity}} (with v-model two way data binding) </p>
+  <button v-on:click="quantity++">add quantity</button>
+  <button v-on:click="quantity--">reduce quantity</button>
+
+  <p> {{ count }} </p>
+  <button v-on:click="changeCount(1)">add count by 1 (single click)</button>
+  <button v-on:click="changeCount(-1)">reduce count by 1 (single click)</button>
+  <button @dblclick="changeCount(2)">add count by 2 (double click)</button>
+  <button @dblclick="changeCount(-2)">reduce count by 2 (double click)</button> <!-- "@" is short for "v:on" -->
+
+  <div class="canvas" style="width: 200px; height: 200px; margin-top: 20px; background-color: #ddd;" @click="logEvent" @mousemove="logCoords">{{coords.x}}, {{coords.y}}</div>
+
+  <p v-if="betul"> I am correct </p>
+  <p v-if="salah"> I am wrong, sorry. </p>
+
+<keep-alive>
+  <div id="componentA"></div>
+</keep-alive>
+
+  <ul>
+    <li v-for="(item, index) in items"> {{index+1}}. {{item}} </li>
+  </ul>
+
+</div>
+
+<% else %>
+
+<% end %>
+
+</div>
+
+<!-- testing VueJS framework -->
+
+
+<div class="build">
+	<div class="container">
+		<p>Comfort & Quality</p>
+		<p class="build_des">Our tees are 100% made from cotton, ensuring all day comfort. Art prints are 100% infused into the tees with high quality ink print. The tees measurement are of best fit wear with appropriate proportion. Multiple size and cutting are available. Feel free to contact us <span style="text-decoration: underline; font-weight: bold;"><%= link_to 'here!', contact_path %></span> shall you have additional requirement. Free Delivery in Klang Valley area and 7 days no question free return policy.</p>
+	</div>
+</div>
+
+<!-- <div class="idea">
+	<div class="container">
+		<p>How about a special gift to others?<br>
+		Contact us for a custom printed card and we will deliver it to your desired recipient.
+		Hassle free gesture!</p>
+	</div>
+</div-->
+
+</div>
+
+<style type="text/css">
+  
+[v-cloak] > * { visibility: hidden; }
+[v-cloak]::before { content: "loading…" }
+
+</style>

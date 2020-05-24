@@ -1,0 +1,23 @@
+Hi <%= @order.name %>
+
+Thanks for your order!
+Your Order Number <%= @order.number %> had been shipped!
+
+Your ordered items:
+
+<% @order.line_items.each do |item| %>
+SKU: <%= item.variant.SKU %>
+Quantity: <%= item.quantity %>
+Unit Price: <%= number_to_currency(item.final_price, unit:"RM") %>
+Total Price: <%= number_to_currency(item.total_final_price, unit:"RM") %>
+<% end %>
+
+Payment Method: <%= @order.pay_type %> 
+____________________________________________________________________
+
+thanks again for supporting us!
+
+Sincerely From,
+Teesprit Malaysia
+teesprit20@gmail.com
+

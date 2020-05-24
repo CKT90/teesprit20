@@ -1,0 +1,440 @@
+$update-color: #009391;
+
+.here {
+	color: #5499c7;
+	font-weight: bold;
+}
+
+.cart_page {
+	padding-top: 30px;
+	position: relative;
+	@include desktop {
+		padding-bottom: 100px;
+	}
+
+	tr {
+		height: 200px;
+		@include mobile {
+			height: 100%;
+			display: inline-block;
+		}
+	}
+
+	.update_cart {
+		position: absolute;
+		right: 23px;
+		top: 5px;
+		width: auto;
+		padding: 5px 10px 5px 10px;
+		border-radius: 5px;
+		border: 0;
+		background-color: $update-color;
+		color: #fff;
+		box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
+		&:hover{
+			box-shadow: 0 2px 3px 1px rgba(0, 0, 0, 0.2);
+		}
+	}
+
+	h1 {
+		position:relative;
+		margin: 0;
+		padding-bottom: 0.5em;
+		letter-spacing: -1px;
+		text-transform: uppercase;
+		font: 150% sans-serif;
+		font-size: 1.7em;
+		font-weight: bold; 
+		text-align: left;
+	}
+
+	td.cart_images {  /* table td 1 (one) */
+		width: 30%;
+		@include mobile {
+			display: block;
+			width: 100%;
+			padding: 20px;
+		}
+		img {
+			border: 1px solid #C1C1C1;
+			height: 222px;
+			width: 222px;
+			@include desktop{
+				height: 180px;
+				width: 180px;
+			}
+			@include mobile {
+				height: 100%;
+				width: 100%;
+			}
+		}
+	}
+
+	td.mid_column { /* table td 2 (two) */
+		width: 50%;
+		position: relative;
+		@include mobile {
+			display: block;
+			width: 100%;
+			overflow: hidden;
+			border: 0px;
+			padding-left: 20px;
+			padding-right: 20px;
+			padding-top: 0px;
+		}
+		.item_title {
+			float:left;
+			font-size:20px;
+			font-weight: bold;
+			@include mobile {
+				font-size: 20px;
+				float: right;
+				margin-right: 6px;
+				text-align: right;
+			}
+			a {
+				&:hover  {
+					text-decoration: none;
+				}
+			}
+		}
+
+		.option_types_cart {
+			border-top: 1px solid #e8ddcb;
+			float:left;
+			clear: both;
+			padding-top: 3px;
+			width:100%;
+			@include mobile {
+				font-size: 14px;
+				border-top: none;
+				padding-bottom: 8px;
+				font-weight: bold;
+			}
+
+			ul {
+				list-style-type: none; 
+				padding: 0px; 
+				margin: 0px;
+			
+				span.cart_ov {
+					font-style: italic;
+					font-size:16px;
+					clear: both;
+					float:left;
+					border-radius: 2px;
+					color: #000;
+					width:auto;
+					@include desktop {
+						font-size:18px;
+						color: #C26C36;
+						float: right;
+						margin-right: 6px;
+					}
+				}
+			}
+		}
+
+		.cart_description {
+			clear:both;
+			float:left;
+			font-size: 12px;
+			margin-right:10px;
+			text-align: justify;
+			@include desktop {
+				display:none;
+			}
+		}
+
+		.unit_quantity {
+			position: absolute;
+			bottom: 5px;
+			left: 8px;
+			@include mobile {
+				position: relative;
+				bottom: 0px;
+				left: 0px;
+				display: inline-block;
+				float: right;
+			}
+
+			.cart_unit_price {
+				float:left;
+				font-size: 18px;
+				line-height: 40px;
+				display: inline-block;
+				@include desktop {
+					font-size: 14px;
+				}
+				@include mobile {
+					font-size: 18px;
+					text-align: right;
+				}
+			}
+		}
+	}
+
+
+	td.item_price { /* table td 3 (three) */
+		width: 20%;
+		text-align: right;
+		position: relative;
+		@include mobile {
+			display: block;
+			width: 100%;
+			border-top: 0px;
+			overflow: hidden;
+			padding: 0px 20px 8px 20px;
+		}
+
+		.bottom {
+			@include mobile {
+				display: block;
+				width: 100%;
+				overflow: hidden;
+			}
+		}
+
+		.top {
+			@include mobile {
+				display: inline-block;
+				float: right;
+				overflow: hidden;
+			}
+		}
+
+		.sub_total {
+			position: relative;
+			font-size: 14px;
+			@include mobile {
+				float: left;
+				display: block;   
+				line-height: 23px;
+				margin-right: 12px;
+				color: #368BC1;
+				font-weight: bold;
+			}
+		}
+
+		.total_unit_cart_price {
+			position: relative;
+			font-size: 20px;
+			font-weight: bold;
+			@include mobile {
+				float: right;
+				display: block; 
+				font-size: 25px;
+				line-height: 30px;
+				right:6px;  
+			}
+		}
+
+		.delete_cart_item {
+			position: absolute;
+			bottom: 10px;
+			right: 5px;
+			margin-top: 20px;
+			border: 1px solid #cecece;
+			border-radius: 4px;
+			color: #cecece;
+			i.btn {
+				&:hover {
+					color:#979797;
+				}
+			}
+			@include mobile {
+				position: relative;
+				display: inline-block;
+				margin-top: 15px;
+			}
+		}
+	}
+
+	.total_line {   /* line depicting total */
+		font-size:20px;
+		text-align: right;
+		position: relative;
+		.total_cell {
+			font-weight: bold;
+		}
+		@include mobile {
+			visibility: hidden;
+		}
+	}
+}
+
+.col-md-8 {
+	@include mobile {
+		padding: 0px;
+	}
+}
+
+
+
+.quantity_design {
+	position: relative;
+	width: 150px;
+	font-size: 25px;
+	height:40px;
+	display: inline-block;
+	@include mobile {
+		float: right;
+		margin-right: 6px;
+	}
+
+	.cart-quantity-up {
+		position:absolute;
+		right:0;
+		width:40px;
+		height: 39.5px;
+		border-radius: 0 5px 5px 0;
+		text-align: center;
+		border: 1px solid #bdbdbd;
+		color:  #fff;
+		background-color:  #c6c3c3;
+		cursor: pointer;
+		&:hover  {
+			background-color: #7f7d7d;
+		}
+			
+	  -webkit-user-select: none;  
+      -moz-user-select: none;    
+      -ms-user-select: none;      
+      user-select: none;
+	}
+
+	.cart_quantity {
+		position:absolute;
+		margin: 0 40px 0 40px;
+		width: 70px;
+		border-top: 1px solid #bdbdbd;
+		border-bottom: 1px solid #bdbdbd;
+		border-left: 0;
+		border-right: 0;
+		text-align: center;
+		background-color:  #Fff;
+		color: #000;
+		height:38px;
+		font-size: 18px;
+		border-radius: 0;
+		&:focus,
+		&:active{
+		  background-image: none;
+		  outline: 0;
+		  -webkit-box-shadow: none;
+      	  box-shadow: none;
+		}
+	}
+
+
+	.cart-quantity-down {
+		position:absolute;
+		border-radius: 5px 0 0 5px ;
+		background-color:  #c8c8c8;
+		left: 0;
+		width:40px;
+		height: 39.5px;
+		text-align: center;
+		border: 1px solid #bdbdbd;
+		color:  #fff;
+		cursor: pointer;
+		&:hover  {
+			background-color: #7f7d7d;
+		}
+			
+	    -webkit-user-select: none;  
+        -moz-user-select: none;    
+        -ms-user-select: none;      
+        user-select: none;
+	}
+}
+
+
+
+.cart_summary_info {
+	background-color: #fcfbfb;
+	padding-top:10px;
+	@include mobile {
+		background-color: #e7e7e7;
+	}
+
+	span {
+		font-weight: bold;
+		font-size: 25px;
+	}
+
+	.table {
+		width: 100%;
+		@include mobile {
+			margin-bottom: 0px;
+		}
+
+		tr {
+			height: auto;
+			@include mobile {
+				font-size: 1.2em;
+			}
+				
+			td.line_one {
+				width: 40%;
+			}
+
+			td.line_two {
+				width: 60%; 
+				text-align: right;
+			}
+		}
+	}
+
+	.checkout_button {
+		background-color:#009391;
+		color:#fff;
+		border: 0;
+		padding: 5px 0 5px 0;
+		float: left;
+		&:hover{
+			box-shadow: 0 0 0  1px rgba(0, 0, 0, 0.2);
+			}
+
+		@include desktop {
+			float: right;
+			width: 300px;
+		}
+		@include mobile {
+			width: 100%;
+		}
+	}
+
+	.empty_cart_button{
+		background-color: #000;
+		color:#fff;
+		padding: 5px 0 5px 0;
+		float:right;
+		&:hover{
+			box-shadow: 0 0 0  1px rgba(0, 0, 0, 0.2);
+		}
+		@include desktop {
+			clear: both;
+			width: 300px;
+		}
+		@include mobile {
+			width: 100%;
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,41 @@
+dog_one:
+  SKU: dog1
+  price: 10
+  count_on_hand: 10
+  cost_price: 5
+  product: dog
+
+dog_two:
+  SKU: dog2
+  price: 15
+  count_on_hand: 15
+  cost_price: 10
+  product: dog
+
+bear_one:
+  SKU: bear1
+  price: 10
+  count_on_hand: 10
+  cost_price: 5
+  product: bear
+
+bear_two:
+  SKU: bear2
+  price: 15
+  count_on_hand: 15
+  cost_price: 10
+  product: bear
+
+bear_three:
+  SKU: bear3
+  price: 10
+  count_on_hand: 10
+  cost_price: 5
+  product: bear
+
+bear_four:
+  SKU: bear4
+  price: 15
+  count_on_hand: 15
+  cost_price: 10
+  product: bear

@@ -1,0 +1,111 @@
+<% provide(:title, "About") %>
+
+<div class="about_page">
+	<div class="aboutA">
+		<div class="container">
+			<div class="col-lg-6 col-md-6 col-xs-12 text1abt1">
+				<h1>About Us</h1>
+				<p>
+					Teesprit (2020) is a brand project to promote local graphic designed tees produced and printed in Malaysia. the tee art print themes are not limited to any, hence the name of the project. We hope these tee arts brings additional variation to the local apparel industry.
+					</br>
+					</br>
+					Tee art-prints here are guaranteed 100% original idea and plagiarism-free. All ideas from puns to local cultures are welcomed. 
+					</br>
+					</br>
+					If you are aspire to share the same idea, collaboration or anything in your mind on this, drop a message <span style="text-decoration: underline; font-weight: bold;"><%= link_to 'here!', contact_path %></span>
+					</br>
+					</br>
+					<!--<i style="color: #1e98b2;" class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp; Artist (photoshop, illustrator)
+					</br>
+					<i style="color: #1e98b2;" class="fa fa-desktop" aria-hidden="true"></i>&nbsp; Front-end developer (CSS, HTML, Javascript)-->
+				</p>
+			</div>
+			<div class="col-lg-6 col-md-6 col-xs-12 text2abt1">
+				<%= image_tag("about1.png", alt: "tee tees tea", class: 'image_abt1') %>
+			</div>
+		</div>
+	</div>
+
+	<div class="aboutB">
+		<div class="container">
+			<div class="col-lg-6 col-md-6 col-xs-12 text1abt2">
+				<%= image_tag("comp.png", alt: "tee tees tea", class: 'image_abt2') %>
+			</div>
+			<div class="col-lg-6 text2abt2">
+				<h1> Service Limitation</h1>
+					Currently we are having some limitation with our e-commerce services. We are continuously improving our services to ensure your experience browsing our sites and liaising with us. Sincere apologize for any inconvenience caused! 
+					</br>
+					</br>
+					Current limitations include: 
+					</br>
+					<p>
+					<p>
+					<i style="color: #1e98b2; font-size: 1.2em;" class="fa fa-credit-card" aria-hidden="true"></i> &nbsp; Limited payment method (only manual bank-in and Cash on Delivery) <%= link_to 'click here for more info!', payment_path, style: 'font-weight:bold; text-decoration:underline;' %>
+					
+					</p>
+
+					<p>
+					<i style="color: #1e98b2; font-size: 1.2em;" class="fa fa-picture-o fa-2x" aria-hidden="true"></i> &nbsp; <span >Very basic webpage interface. Improvements are underway. Inconvenience caused are deeply regretted. Drop us a message <span style="text-decoration: underline; font-weight: bold;"><%= link_to 'here', contact_path %></span> if you have any suggestions for improvements.
+					</span> 
+					</p>
+					</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="aboutC">
+		<div class="container">
+			<div class="col-lg-6 col-md-6 col-xs-12 text1abt3">
+				<h1>FAQ</h1>
+				<p>
+					<div style="font-weight: bold; text-decoration: underline;">Purchases outside Malaysia</div>
+					Currently this store is only serving local Malaysia market. For outside Malaysia interested purchases, please drop a message <span style="text-decoration: underline; color:  #cb4335"><%= link_to 'here!', contact_path %></span> or visit <span style="text-decoration: underline; color:  #cb4335 ;"><%= link_to 'Society6 shop', "https://society6.com/theeverythingapparel/s?q=popular+apparel" %></span> and <span style="text-decoration: underline; color:  #cb4335 ;"><%= link_to 'Threadless Artist Shop', "https://theeveythingapparel.threadless.com/" %></span> here.			</br>
+					</br>
+					<div style="font-weight: bold; text-decoration: underline;">Transaction Currency in this store</div>
+					MYR (Ringgit Malaysia only)
+					</br>
+					</br>
+					<div style="font-weight: bold; text-decoration: underline;">Item Delivery</div>
+					Please allow up to 7 days for delivery arrival to customer doorstep. As this is just started, we might face limitations, apologize for the inconveniences in advanced!
+					</br>
+					</br>
+					<div style="font-weight: bold; text-decoration: underline;">Item Return</div>
+					7 days return policy with reasons including tee size, print quality, damaged tees upon arrival and other subjective issues. All in all will open communication to customers to assist on this. 
+					</br>
+					</br>
+					<div style="font-weight: bold; text-decoration: underline;">Nationwide coverage and Transaction Method</div>
+					Postage fees applies accordingly in the website. Postage upon Bank-in by customers and COD (Cash on Deliveries) only applies to Klang Valley area.
+					<br>
+					Delivery fees applies as followed:
+					<br>
+					<span style="font-weight: bold">RM10.00 </span> - Outside Klang Valley within Peninsula
+					<br>
+					<span style="font-weight: bold">Free </span> - Klang Valley
+					<br>
+					<span style="font-weight: bold">RM12.00 </span> - East Malaysia
+					<br>
+					<br>
+					<div style="font-weight: bold; text-decoration: underline;">Caring your Tee</div>
+					We advice caring tips for your tee as below:
+					<br>
+					1. Turn inside out before throwing them into washing machine.
+					<br>
+					2. Wash similar clothes together. (Clothes with buttons such as jeans or jacket might causes prints to peel)
+					<br>
+					3. Wash with cold water. (prevent print distillation and save energy too!)
+					<br>
+					4. Avoid bleach. (strong detergents too as they can dissolve the print coating.)
+					<br>
+					5. Try drying them under shade. 
+					<br>
+					6. Iron inside out. (turn garment inside out before ironing, as direct heat on print will affect the color etc.)
+					<br>
+					<br>
+				</p>
+			</div>
+			<div class="col-lg-6 col-md-6 col-xs-12 text2abt3">
+				<%= image_tag("about3.png", alt: "tee tees tea", class: 'image_abt3') %>
+			</div>
+		</div>
+	</div>
+</div>

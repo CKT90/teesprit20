@@ -1,0 +1,73 @@
+.sales_chart {
+	text-align: center;
+
+	.pie_chart{
+		min-width: 450px;
+		display: inline-block;
+		margin: 20px 20px 30px 20px;
+	}
+	
+	.histogram {
+		min-width: 450px;
+		display: inline-block;
+		margin: 20px;
+	}
+}
+
+
+.total_sales_till_date {
+	border: 1px solid #cad0cf;
+	border-radius: 5px;
+	padding: 20px;
+	display: inline-block;
+	margin: 15px;
+
+}
+
+.order_statistics {
+	border: 1px solid #cad0cf;
+	border-radius: 5px;
+	display: inline-block;
+	margin: 15px;
+	.order_stats {
+		display: inline-block;
+		margin: 20px;
+	}
+}
+
+.sales_table {
+	margin-top: 50px;
+	font-size: 0.8em;
+
+	.thead-inverse {
+		background-color: #3b3b3b;
+		color: #fff;
+		th {
+			text-align: center;
+			a.sort_link {
+				&:focus,
+				&:active,
+				&:hover {
+					color: #d3d3d3 !important;
+				}
+			}
+		}
+	}
+
+	td {
+		text-align: center;
+	}
+}
+
+.sales_total  {
+	font-weight: bold;
+
+}
+
+.report_filter {
+	margin-top: 30px;
+
+	.filter_button {
+		margin-top: 25px;
+	}
+}

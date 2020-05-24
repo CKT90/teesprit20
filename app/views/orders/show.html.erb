@@ -1,0 +1,157 @@
+
+<div class="order_form paypal_sum">
+	<div class="container">
+		<div class="col-lg-5 col-md-6 col-xs-12">
+			<div class ="order_cart">  
+				<p class="cart_title"> Order Summary </p> 
+				<table class="table">
+		  			<% @order.line_items.each do |item| %>
+						<tr >
+						  <td style = "width: 20%;" class="order_images">
+							<% if item.variant.images.any? %>
+							  <%= image_tag(item.variant.images.first.image_url) %>
+						    <% else %>
+						      <% if Product.find(item.variant.product_id).images.any? %>
+						      	<%= image_tag(Product.find(item.variant.product_id).images.first.image_url) %>
+						      <% else %>
+							  	<%= image_tag("img2.png", alt: "Upload Image Here!")%>
+							  <% end %>
+						    <%end%>							
+						  </td>
+
+						  <td class="mid_column" style = "width: 50%; ">
+							<span class="item_title"><%=link_to Product.find(item.variant.product_id).title, product_path(Product.find(item.variant.product_id).number) %> </span>
+							<span class="option_types_cart" style="width: 100%;">
+								<% item.variant.option_values.each do |cot| %> 
+									<ul>
+								    	<li> <%= cot.presentation %> </li>
+									</ul>
+								<%end%>
+							</span>
+						  </td>
+
+						  <td class="order_item_price" style = "width: 30%;">
+						    <span class="grand_total"> <%= number_to_currency(item.total_price, unit: "RM") %></span>
+						    <span class="order_quantity"><%= number_to_currency(item.final_price, unit: "RM") %> &times; <%= item.quantity %> </span>
+						  </td>
+		    			</tr> 
+	     			 <% end %>
+
+
+	          		<tr class="total_order">
+			          <td></td>
+			          <td class="grand_total">Delivery (RM)</td>
+				      <td  class="grand_number delivery" id= "delivery_c"><%= number_to_currency(@order.delivery_cost, unit: "") %></td>
+				    </tr>
+
+		            <tr class="total_order">
+		          	  <td></td>
+		          	  <td class="grand_total">Grand Total (RM)</td>
+			          <td  class="grand_number total_p" id= "total_p"><%= number_to_currency(@order.grand_total_price, unit: "") %></td>
+			        </tr>
+	            </table>
+			</div>
+
+			<div class="refund_order">
+				<div class="left">
+					<i class="fa fa-lock"></i>
+				</div>
+
+				<div class="right">
+					<span>Your online payment is secured!</span> <br>
+					<span>COD payment option is only available at Klang Valley (KL and Selangor) only. Click 
+					<%= link_to "HERE", payment_path, target: :_blank %> for more payment information!</span>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="spinner">
+		  <div class="rect1"></div>
+		  <div class="rect2"></div>
+		  <div class="rect3"></div>
+		  <div class="rect4"></div>
+		  <div class="rect5"></div>
+		</div>
+
+		<div id="loading"></div>
+
+		<div class=" col-lg-6 col-md-6 col-xs-12">
+			<div class="order_fill" style="padding-bottom: 30px;">
+				<p class="order_title" style="font-size: 1.4em; text-decoration: underline;">Details Summary </p>
+
+				<div class="summarization">
+
+				    <span> Name </span>
+				    <p><%= @order.name %></p>
+
+				    <span> Contact Number </span>
+				    <p><%= @order.contact_number %></p>
+				    
+				    <span> Email </span>
+				    <p><%= @order.email %></p>
+
+				    <span> Delivery Address </span>
+				    <p><%= @order.address %></p>
+
+				    <span> State </span>
+				  	<p><%= @order.states %></p>
+
+				    <span> Payment Type</span>
+				  	<p><%= @order.pay_type %></p>
+
+				  	<% if @order.pay_type == "Cash on Delivery (COD)" || @order.pay_type == "Bank-in (Delivery)" %>
+<!-- 				  	<% elsif  @order.pay_type == "Paypal"  %>
+					  	<p>
+							<%= form_tag "https://www.paypal.com/cgi-bin/webscr", {:class => 'paypal_submit'} do %>
+							  <%= hidden_field_tag :cmd, "_s-xclick" %>
+							  <%= hidden_field_tag :encrypted, @order.paypal_encrypted(root_url, @order.delivery_cost, payment_notification_url) %>
+							    <p><%= submit_tag "Proceed to PAYPAL" %></p>
+							<% end %>
+						</p> -->
+
+					<% elsif @order.pay_type == "Credit Card" %>
+						<a data-pay="<%= @order.id %>" href="#">Go To Payment</a>
+					<% end %>	
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</div>
+
+
+
+
+
+ <% if current_page?(order_path) %>
+	<script type="text/javascript">
+	  $(document).on('turbolinks:load', function() {
+	  	$('div#footer').remove();
+	  });
+	</script>
+<% end %>
+
+
+<script src="https://js.stripe.com/v3/"></script>
+<script type="text/javascript">
+
+ document
+  .querySelector('[data-pay]')
+  .addEventListener('click', (event) => {
+    fetch(`/stripe_checkout?id=${event.currentTarget.dataset.pay}`)
+    .then(response => response.json())
+    .then((json) => {
+      var stripe = Stripe(json.publishable_key);
+      stripe.redirectToCheckout({
+        sessionId: json.session_id
+      })
+    .then(function (result) {
+    });
+  });
+  event.returnValue = false;
+});
+
+
+</script>

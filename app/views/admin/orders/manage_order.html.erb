@@ -1,0 +1,52 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item" style="color: #43aef0;"><%= link_to "Order Index", admin_orders_path %></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= @order.number %> </li>
+  </ol>
+</nav>
+
+
+<div class="col-lg-5">
+
+ <%= react_component("AdminOrderCard", {order: @order, number: @order.number, date: @order.created_at.to_date, time: @order.created_at.strftime("%I:%M%p")}) %>
+
+  <div class="order_decision" style=" margin-top: 20px; margin-bottom: 20px;">
+    <% if @order.order_status_cd == 1 %>
+    
+
+      <%= react_component("OrderButton", {orderNo: @order.number, value: "2", label: "Cancel Order", color: "#FF8A80", authenticity_token: form_authenticity_token}) %>
+    <br>
+      <%= react_component("OrderButton", {orderNo: @order.number, value: "0", label: "Pend Order", color: "#FFC107", authenticity_token: form_authenticity_token}) %>
+
+
+    <% elsif @order.order_status_cd == 2 %>
+  
+    <% elsif @order.order_status_cd == 0 %>
+
+
+      <%= react_component("OrderButton", {orderNo: @order.number, value: "1", label: "Approve Order", color: "#8BC34A", authenticity_token: form_authenticity_token}) %>
+    <br>
+      <%= react_component("OrderButton", {orderNo: @order.number, value: "2", label: "Cancel Order", color: "#FF8A80", authenticity_token: form_authenticity_token}) %>
+
+    <% end %>
+  </div>
+</div>
+
+
+<div class="col-lg-7">
+
+<%= react_component("AdminOrderTotal", {totalPrice: number_to_currency(@order.total_order_selling_price, unit: "RM"), delivery: number_to_currency(@order.delivery_cost, unit: "RM"), grandTotal: number_to_currency(@order.grand_total_price, unit: "RM") }) %>
+
+<% @order.line_items.each do |item| %>
+<%= react_component("UserVariantList", {image: Product.find(item.variant.product_id).images.first.image_url, SKU: item.variant.SKU, skuLink: "/admin/products/#{Product.find(item.variant.product_id).number}/variants/#{item.variant.SKU}/edit", price: number_to_currency(item.final_price, unit:"RM"), quantity: item.quantity, finalPrice: number_to_currency(item.total_final_price, unit:"RM")}) %>
+<% end %>
+
+
+<%= react_component("AdminOrderText", { initial: @order.payment_remarks, label: "Payment Remarks", remarkUrl:"/admin/orders/#{@order.id}/update_order_payment_remarks", attribute: @order.payment_status_cd, trueValue: "1", trueName: "Paid", falseValue: "0", falseName: "Pending", title: "Payment Status", postUrl:"/admin/orders/#{@order.id}/update_order_payment_status"}) %>
+
+<%= react_component("AdminOrderText", { initial: @order.shipment_remarks, label: "Shipment Remarks", remarkUrl:"/admin/orders/#{@order.id}/update_order_shipment_remarks", attribute: @order.shipment_status_cd, trueValue: "1", trueName: "Shipped", falseValue: "0", falseName: "Pending", title: "Shipment Status", postUrl:"/admin/orders/#{@order.id}/update_order_shipment_status"}) %>
+
+
+</div>
+
+

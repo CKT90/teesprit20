@@ -1,0 +1,99 @@
+<div class="sales_chart">
+	<div class="pie_chart">
+		<p style="text-align: center; color: #fff; background-color: #FB7861; font-weight: bold; display: inline-block; padding: 10px; border-radius: 5px;"> Order Number Breakdown</p>
+		<%= pie_chart({"Cost" => @real_orders.sum(&:total_order_cost), "Delivery Cost" => @real_orders.sum(&:delivery_cost), "Net Profit" => @real_orders.sum(&:total_order_net_profit) }) %>
+	</div>
+
+	<div class="histogram">
+		<p style="text-align: center; color: #fff; background-color: #FB7861; font-weight: bold; display: inline-block; padding: 10px; border-radius: 5px;"> Monthly Order Revenue </p>
+		<%= column_chart Order.group_by_month(:created_at, last: 6, format: "%b %Y").sum(:grand_total_price), colors: ["#1e98b2"], xtitle: "Month", ytitle: "Value (RM)" %>
+	</div>
+</div>
+
+<div class="container" style="text-align: center;">
+	<div class="total_sales_till_date">
+		<span> Total Revenue till Date </span><br>
+		<span style="font-size: 3em; color:#1e98b2;"> <%= number_to_currency(@real_orders.sum(&:grand_total_price), unit: "RM") %></span>
+	</div>
+
+	<div class="total_sales_till_date">
+		<span> Total Net Profit till Date </span><br>
+		<span style="font-size: 3em; color:#1e98b2;"> <%= number_to_currency(@real_orders.sum(&:total_order_net_profit), unit: "RM") %></span>
+	</div>
+
+	<div class="order_statistics">
+
+		<div class="order_stats">
+			<span> Created </span><br>
+			<span style="font-size: 3em; color:#1e98b2;"> <%= @total_orders.count.to_i %></span>
+		</div>
+
+		<div class="order_stats">
+			<span> Deleted </span><br>
+			<span style="font-size: 3em; color:#1e98b2;"> <%= @total_orders.where(hidden: true).count.to_i %></span>
+		</div>
+
+		<div class="order_stats">
+			<span> Approved </span><br>
+			<span style="font-size: 3em; color:#1e98b2;"> <%= @total_orders.where(order_status_cd: "1").where(hidden: false).count.to_i %></span>
+		</div>
+
+		<div class="order_stats">
+			<span> Canceled </span><br>
+			<span style="font-size: 3em; color:#1e98b2;"> <%= @total_orders.where(order_status_cd: "2").where(hidden: false).count.to_i %></span>
+		</div>
+
+		<div class="order_stats">
+			<span> Pending </span><br>
+			<span style="font-size: 3em; color:#1e98b2;"> <%= @total_orders.where(order_status_cd: "0").where(hidden: false).count.to_i %></span>
+		</div>
+	</div>
+</div>
+
+
+<div class="col-lg-12 report_filter container">
+	<%= search_form_for [:admin, @search], url: admin_report_path, :html => { :id => "sales_search" } do |f| %>
+	  
+	  <div class="col-lg-4">
+		  <%= f.label :created_at, "From" %>
+		  <%= f.text_field :created_at_gteq, :value => @search.created_at.try(:strftime, "%Y-%m-%d") %>
+	  </div>
+
+	  <div class="col-lg-4">
+		  <%= f.label :created_at, "To" %>
+		  <%= f.text_field :created_at_lteq, :value => @search.created_at.try(:strftime, "%Y-%m-%d") %>
+	  </div>
+
+	  <div class="col-lg-4">
+	    <div class="col-lg-12"><%= f.submit "Search", class: "btn btn-primary filter_button" %></div>
+	  </div>
+	<% end %>
+</div>
+
+<div class="col-lg-12">
+	<table class="table sales_table">
+	  <thead class="thead-inverse">
+	    <tr>
+	      <th style="width:15%; text-decoration: underline;"><%= sort_link @search, :created_at, "Date" %></th>
+	      <th style="width:17%;">Order No.</th>
+	      <th style="width:17%;">Grand Total (RM)</th>
+	      <th style="width:17%;">Product Cost (RM)</th>
+	      <th style="width:17%;">Delivery Cost (RM)</th>
+	      <th style="width:17%;">Net Profit (RM)</th>
+	    </tr>
+	  </thead>
+
+	  <tbody>
+	    <% @qualified_orders.each do |order| %>
+	      <tr>
+	      <td><%= order.created_at.strftime('%a, %d %b %Y ') %></td>
+	      <td style="color:#1e98b2;"><%= link_to order.number, admin_order_manage_order_path(order) %></td>
+	      <td id="revenue_number"><%= number_to_currency(order.grand_total_price, unit: "") %></td>
+	      <td id="actual_number"><%= number_to_currency(order.total_order_cost, unit: "") %></td>
+	      <td id="delivery_number"><%= number_to_currency(order.delivery_cost, unit: "") %></td>
+	      <td id="net_number"><%= number_to_currency(order.total_order_net_profit, unit: "") %></td>
+	      </tr>
+	    <% end %>
+	  </tbody>
+	</table>
+</div>

@@ -1,0 +1,67 @@
+
+
+<div class="admin-nav">
+
+	<div class="admin-nav-button">
+			<span class="menu-toggle"><i class="fa fa-bars"></i></span>
+	</div>
+
+	<div class="admin-nav-title">
+		<%= link_to "Administration Site", admin_orders_path %>
+	</div>
+
+	<div class="admin-user" style="float: right; margin-right:15px;">
+		<span style="margin-right: 10px;"> Hi, <%=current_user.name %>! </span>
+		<span> <%= link_to "Go To Store", root_path, class: "btn h-btn", style: "margin-bottom: 5px;" %></span>
+	</div>
+
+</div>
+
+<div id="wrapper">
+	<nav class="navbar sidebar" role="navigation">
+		<div id="sidebar-wrapper">
+			<ul class="sidebar-nav nav-stacked">
+				<li data-toggle="collapse" data-target="#dash" class="collapsed">
+					<a href="#" class="prevent disable_link"><i class="fa fa-shopping-cart"></i>ORDER<span class="toggle-icon fa fa-angle-left fa-pull-right"></span></a>
+					<ul class="sub-menu collapse option-back" id="dash">
+						<li><%= link_to "Order List", admin_orders_path %></li>
+						<li><%= link_to "New Order", admin_orders_path %></li>
+						<li><%= link_to "Deleted Orders", admin_deleted_index_path, :method => :get %></li>
+					</ul>
+				</li>
+				
+				<li data-toggle="collapse" data-target="#products" class="collapsed">
+					<a href="#" class="prevent disable_link"><i class="fa fa-file"></i>PRODUCTS<span class="toggle-icon fa fa-angle-left fa-pull-right"></span></a>
+					<ul class="sub-menu collapse option-back" id="products">
+						<li><%= link_to "Product List", admin_products_path %></li>
+						<li><%= link_to "New Product", new_admin_product_path %></li>
+						<li><%= link_to "Deleted Products", admin_deleted_product_index_path, :method => :get %></li>
+						<li><%= link_to "Manage Option Types", admin_option_types_path %></li>
+					</ul>
+				</li>
+
+				<li data-toggle="collapse" data-target="#users" class="collapsed">
+					<a href="#" class="prevent disable_link"><i class="fa fa-user"></i>USERS<span class="toggle-icon fa fa-angle-left fa-pull-right"></span></a>
+					<ul class="sub-menu collapse option-back" id="users">
+						<li><%= link_to "User List", admin_users_path %></li>
+						<li><%= link_to "New User", new_admin_product_path %></li>
+					</ul>
+				</li>
+
+
+				<li data-toggle="collapse" data-target="#messages" class="collapsed">
+					<a href="#" class="prevent disable_link"><i class="fa fa-inbox"></i>MESSAGES<span class="toggle-icon fa fa-angle-left fa-pull-right"></span></a>
+					<ul class="sub-menu collapse option-back" id="messages">
+						<li><%= link_to "Messages", admin_messages_path %></li>
+					</ul>
+				</li>
+
+				<li data-toggle="collapse" data-target="#report" class="collapsed">
+					<a href="#" class="prevent disable_link"><i class="fa fa-usd"></i>SALES REPORT<span class="toggle-icon fa fa-angle-left fa-pull-right"></span></a>
+					<ul class="sub-menu collapse option-back" id="report">
+						<li><%= link_to "Report", admin_report_path %></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</nav>

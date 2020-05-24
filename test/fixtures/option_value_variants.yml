@@ -1,0 +1,31 @@
+white_dog:
+  variant: dog_one
+  option_value: white
+
+black_dog:
+  variant: dog_two
+  option_value: black
+
+black_male_bear:
+  variant: bear_one
+  option_value: 
+    - black
+    - male
+
+black_female_bear:
+  variant: bear_two
+  option_value: 
+    - black
+    - female
+
+white_male_bear:
+  variant: bear_three
+  option_value: 
+    - white
+    - male
+
+white_female_bear:
+  variant: bear_four
+  option_value: 
+    - white
+    - female

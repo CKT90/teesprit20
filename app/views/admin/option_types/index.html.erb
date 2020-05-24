@@ -1,0 +1,53 @@
+<% provide(:title, 'Manage Option Types') %>
+
+  <h1 style="text-align: center; margin-bottom: 30px; font-weight: bold;">NEW OPTION TYPES</h1>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+      <%= render "shared/error_messages", :target => @option_type %>
+
+        <%= form_for([:admin, @option_type]) do |f| %>
+
+          <%= f.label :name %>
+          <%= f.text_field :name, class: 'form-control' %>
+
+          <%= f.label :presentation %>
+          <%= f.text_field :presentation, class: 'form-control' %>
+
+          <%= f.label :color, class: "checkbox inline" do %>
+          <%= f.check_box :color %>
+
+          <span>Colorize</span>
+          
+          <% end %>
+
+          <%= f.submit "Create Option Type", class: "btn btn-primary" %>
+
+        <% end %>
+      </div>
+    </div>
+
+
+<table class="table ot_table">
+  <thead class="thead-inverse">
+    <tr>
+      <th style="width: 25%; text-decoration: underline;"><%= sort_link @search, :created_at, "Date Created" %></th>
+      <th style="width: 25%; text-align: center;">Presentation</th>
+      <th style="width: 25%; text-align: center;">Name</th>
+      <th style="width: 25%; text-align: center;">Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @option_types.each do |ot| %>
+      <tr>
+      	<td> <%= ot.created_at.strftime('%a, %d %b %Y %H:%M') %> </td>     
+        <td style="text-align: center;"><%= ot.presentation %></td>
+        <td style="text-align: center;"><%= ot.name %></td> 
+        <td style="text-align: center;"> <%= link_to "EDIT", edit_admin_option_type_path(ot), class: "btn ot-btn" %> </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+

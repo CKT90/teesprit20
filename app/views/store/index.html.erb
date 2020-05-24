@@ -1,0 +1,43 @@
+<% provide(:title, "Store") %>
+<div class='store'>
+
+ <div class="container">
+	<h1>STORE</h1>
+		<% cache @products do %>
+		<% @products.each do |product| %>
+		<% unless product.nil? %>
+    			<div class=" col-xs-6 col-sm-6 col-md-4 col-lg-4 store_col">
+        			<div class="thumbnail">
+        				<div class="product_image">
+        					<% if product.variants.all? {|var| var.count_on_hand == 0} %>
+        						<div><p class="outstock">Out of Stock</p></div>
+        					<%end%>
+        					<% if product.images.any? %>
+							    <%= link_to image_tag(product.images.first.image_url(:store)), product %>
+							<% else %>
+							    <%= link_to image_tag("img2.png", alt: "Upload Image Here!"), product %>
+							<%end%>
+						</div>
+						
+						<div class="product_title">
+							<p><%= link_to product.title, product_path(product) %></p>
+						</div>
+						<div class="product_details">
+							<div class=" store_description col-lg-7 col-md-6 col-sm-6 col-xs-12">
+								<span><%= truncate(sanitize(product.description), length:45 ) %></span>
+							</div>
+							<div class="store_price col-lg-5 col-md-6 col-sm-6 col-xs-12;">
+								<span><%= number_to_currency(product.variants.first.price, unit: "RM") %></span>
+							</div>
+						</div>
+					</div>
+				</div>
+		<% end %>
+	<% end %>
+	<% end %>
+	
+	</div>
+	<div class="container"><%= will_paginate @products%></div>
+</div>
+
+

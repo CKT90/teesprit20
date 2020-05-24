@@ -1,0 +1,555 @@
+
+
+/* VARIABLES */
+$header-bg: #000000;
+$menu-width: 250px!default;
+$menu-color: #23b29f;
+$menu-border: #f4b942;
+$menu-color: #f4b942;
+
+/* BASE */
+
+
+html,
+body {
+  font-family: robotol;
+  font-weight: 300;
+ /* font-family: 'Roboto', sans-serif; */
+  font-size: 1em;
+  height: 100%;
+  line-height: 1.4;
+  margin: 0;
+  padding: 0;
+  background-color: #fff !important;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+}
+
+/* HOME HEADER */
+.home_header {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 50px;
+  z-index:999;
+  transition: all 0.1s ease-in;
+  line-height: 50px;
+  color: #fff;
+  background-color: transparent;
+
+  a.underline {
+    &:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 2px;
+      bottom: -7px;
+      background-color: #fff;
+      visibility: hidden;
+      -webkit-transform: scaleX(0);
+      transform: scaleX(0);
+      -webkit-transition: all 0.3s ease-in-out 0s;
+      transition: all 0.3s ease-in-out 0s;
+      @include desktop {
+        height: 0px;
+      }
+    }
+    &:focus { 
+      color: #fff;
+      text-decoration: none;
+    }
+    &:hover {
+      color: #fff;
+      text-decoration: none;
+      &:before {
+        visibility: visible;
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1);
+      }
+    }
+  }
+}
+
+/* header top menus */
+
+.menu {
+  float: left;
+  width: auto;
+  @include desktop {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    color: $menu-color;
+    background-color: $menu-color;
+    -webkit-overflow-scrolling: touch;
+    height: 500px;
+    width: $menu-width;
+    transform: translate($menu-width * -1, 0px);
+  }
+  
+  a {
+    padding: 0 15px;
+    @include desktop {
+      display: block;
+      height: 40px;
+      text-align: center;
+      line-height: 40px;
+      width:100%;
+      border-bottom: 1px solid $menu-border;
+    }
+    &:hover{
+      @include desktop {
+        color: inherit;
+        text-decoration: none;
+      }
+    }
+  }
+
+  .ghost-button-transition { /* Just for sign up in menu, other ghost button not affected */
+    @include desktop {
+      display: block;
+      width: auto;
+      line-height:40px;
+      border: 0px;
+    }
+    &:focus { 
+     @include desktop { 
+        color: inherit;
+        text-decoration: none;
+      }
+    }
+    &:hover {
+      @include desktop {
+        background-color: #666666;
+        text-decoration: none;
+        color: #fff !important;
+        transition: background-color 0.3s ease-in,
+                    color 0.3s ease-in;
+      }
+    }
+  }
+}
+
+
+/* logo logo logo */
+
+#logo {
+  float:left;
+  margin-left:20px;
+  img{
+    position:relative;
+    height: 30px;
+    margin-top: 3px;
+    bottom:5px;
+    @include desktop {
+      bottom: 8px;
+      line-height: 40px;
+      margin-left: 0px;
+    }
+  }
+  @include desktop {
+    margin-left: 5px;
+  }
+}
+
+/* wordings beside LOGO, title of website*/
+#logo_title {
+  float: left;
+  font-size: 1.2em;
+  color: #f9f9ed;
+  letter-spacing: -1px;
+  font-weight: bold;
+  padding-left:10px;
+  padding-right: 15px;
+  line-height:55px;
+  position: relative;
+  bottom: 3px;
+  &:focus,
+  &:hover {
+    color: #eee;
+    text-decoration: none;
+  }
+  @include desktop {
+    margin-left: 10px;
+    padding-left: 0px;
+    line-height: 40px; 
+    top: 1px;
+  }
+  @include mobile {
+    font-size: 1em;
+  }
+}
+
+/* header right side portion (login, carts) */
+div.right-side {
+  position: fixed;
+  top:5px;
+  right: 100px;
+  @include desktop {
+    position: static;
+    line-height: 40px;
+  }
+    a {
+    margin-right: 20px;
+      @include desktop {
+          margin-right: 0px;
+          width: 100%;
+      }
+    }
+}
+
+/*HEADER (when scrolled below with certain point "header")*/
+.header {
+  position: fixed;
+  z-index: 999;
+  top:0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  color: #fff;
+  background-color: #1e98b2;
+  transition: all 0.2s ease-out;
+
+  #logo img {
+    bottom: 0px;
+  }
+
+  #logo_title {
+    line-height: 40px;
+    bottom: 0px;
+  }
+
+  a.login_h_button,
+  a.login_button,
+  a.underline {
+    display: inline-block;
+    line-height:40px;
+    color: #fff;
+    &:hover{
+      color: inherit;
+      text-decoration: none;
+      background-color: #3a3a3a;
+    }
+    &:focus {
+      text-decoration: none;
+    }
+  }
+  
+
+  div.right-side {
+    position: fixed;
+    top:0px;
+    line-height: 40px;
+    right: 100px;
+    @include desktop {
+      position: static;
+      line-height: 40px;
+    }
+    a {
+      margin-right: 0px;
+    }
+  }
+
+  div.cart_drop {
+    position:fixed;
+    right: 30px;
+    top: 0px;
+    cursor:pointer;
+    padding: 0 30px 0 10px;
+    line-height:40px;
+    box-shadow: none;
+    background-color:transparent;
+    i {
+      color: #fff;
+    }
+    &:hover {
+      box-shadow: none;
+      border-radius: 0px;
+      background-color: #1b7e93;
+    }
+  }
+
+  div.notification_number {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 12px;
+    left:35px;
+    width: 15px;
+    height: 20px;
+    border-radius: 3px;
+    background-color: #EC6060;
+
+    bottom: 4px;
+    font-size:12px;
+    line-height: 20px;
+    text-align: center;
+  }  
+
+  .dropdown:hover .dropbtn {
+    display: block;
+    background-color: #666666;
+    text-decoration: none;
+    color: #fff;
+  }
+}
+
+
+
+/* DROPDOWN DROPDOWN DROPDOWN DROPDOWN DROPDOWN DROPDOWN */
+.dropbtn {
+    background-color: transparent;
+    color: white;
+    line-height: 40px;
+    font-size: 1em;
+    border: none;
+    cursor: pointer;
+
+    &:focus {
+      color: #fff;
+      text-decoration: none;
+      outline: none;
+    }
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    @include desktop {
+      width: 100%;
+    }
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1003;
+    overflow: hidden;
+    a {
+      color: black;
+      text-decoration: none;
+      display: block;
+      margin: 0px !important;
+      &:hover {
+        background-color: #f1f1f1;
+        @include desktop {
+          background-color: #666666;
+        }
+      }
+      @include desktop {
+        color: #fff;
+      }
+    }
+    @include desktop {
+      background-color: transparent;
+      width: 100%;
+      border-radius: 0px;
+    }
+}
+
+a.help {
+  border-bottom: 1px solid #cad0cf;
+  @include desktop {
+    border-bottom: 1px solid #f9cb25;
+  }
+}
+
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+  text-decoration: none;
+  color: #fff;
+}
+
+/* CART */
+div.cart_box {
+  position:fixed;
+  top: 0;
+  right:100px;
+  min-height: 100px;
+  width: 250px;
+  height: auto;
+  background-color: #fff;
+  z-index:100111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  &:hover{
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.6), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+  }
+}
+
+div.cart_drop {
+  z-index:100111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111;
+  position:fixed;
+  right: 50px;
+  top: 10px;
+  cursor:pointer;
+  padding:5px 7px 5px 5px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  line-height: 25px;
+  background-color:#fff;
+  @include mobile {
+    right: 5px;
+  }
+  i {
+    color: #000;
+  }
+  &:hover{
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+  }
+}
+
+div.notification_number {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 15px;
+  height: 15px;
+  border-radius: 5px;
+  background-color: #EC6060;
+  right:-7px;
+  font-size:10px;
+  line-height:13px;
+  text-align:center;
+  color: #fff;
+  font-weight: bold;
+  bottom:-5px;
+}
+
+
+@media only screen and (max-width: 1025px) {
+
+  .site-pusher,
+  .site-container {
+    height: 100%;
+    background-color: $menu-color;
+  }
+
+
+
+  .site-pusher {
+    transition-duration: 0.3s;
+    transform: translate(0px, 0px);
+  }
+  
+  .site-content {
+    position: relative;
+  }
+  
+  .with--sidebar {
+
+    .site-container {
+      overflow: hidden;
+    }
+
+    .site-pusher {
+      transform: translate($menu-width, 0px);
+    }
+    .site-cache {
+      position: absolute;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0,0,0,0.6);
+    }
+  }
+
+  .header,
+  .home_header {
+    height: 40px;
+    background-color: #1e98b2;
+    transition: all 0.2s ease-out;
+
+    .menu {
+      line-height: 40px;
+    }
+
+    a.underline {
+      display: inline-block;
+      line-height:40px;
+      color: #fff;
+      &:hover{
+        color: inherit;
+        text-decoration: none;
+        background-color: #3a3a3a;
+      }
+      &:focus {
+        text-decoration: none;
+      }
+    }
+  
+
+    div.cart_drop {
+      position:fixed;
+      right: 30px;
+      top: 0px;
+      cursor:pointer;
+      padding: 0 30px 0 10px;
+      line-height:40px;
+      box-shadow: none;
+      background-color:transparent;
+      i {
+        color: #fff;
+      }
+      &:hover {
+        box-shadow: none;
+        border-radius: 0px;
+        background-color: #1b7e93;
+      }  
+    }
+
+    div.notification_number {
+      content: '';
+      position: absolute;
+      display: block;
+      top: 12px;
+      left:35px;
+      width: 15px;
+      height: 20px;
+      border-radius: 3px;
+      background-color: #EC6060;
+
+      bottom: 4px;
+      font-size:12px;
+      line-height: 20px;
+      text-align: center;
+    }
+  }
+
+/* burger burger menu */
+  .header_icon {
+    position: relative;
+    display: block;
+    float: left;
+    top: 4px;
+    height:40px;
+    width: 50px;
+    cursor: pointer;
+    
+    &:after {
+      content: '';
+      position: absolute;
+      display: block;
+      width: 1rem;
+      line-height: 40px;
+      left: 15px;
+      z-index: 1002;
+      box-shadow: 0 10px 0 1px #fff, 0 16px 0 1px #fff, 0 22px 0 1px #fff;
+    }
+  }
+}
+

@@ -1,0 +1,95 @@
+.creamy {
+	display: inline-block;
+	@include desktop {
+		margin-bottom: 30px;
+	}
+}
+
+.payment_method {
+
+	padding-bottom: 30px;
+	overflow: hidden;
+	@inlude mobile {
+		font-size: 0.7em !important;
+	}
+
+	.bi {
+		@include desktop {
+			border: 0px;
+		}
+	}
+
+	.bi,
+	.cod {
+		margin: 15px 30px 10px 30px;
+		padding: 30px 20px 40px 20px;
+		border-bottom: 2px solid #90c5c7;
+		width: auto;
+		@include mobile {
+			margin: 0px;
+			width: auto;
+			padding: 30px 20px 40px 20px;
+			border-bottom: 0px;
+		}
+
+		.titlebi,
+		.titlecod {
+			font-size: 60px;
+			line-height: 65px;
+			padding: 0px 15px 0px 15px;
+			font-family: GoodDog;
+			color: #fff;
+			border: 5px solid #1e98b2;
+			border-radius: 20px;
+			display: inline-block;
+			margin-left: 30px;
+			margin-bottom: 40px;
+			background-color: #1e98b2;
+			@include mobile {
+				font-size: 35px;
+				line-height: 45px;
+				margin: 0px 0px 10px 0px;
+			}
+		}
+
+		.bicon,
+		.codcon {
+			display: inline-block;
+			width:160px;
+			height:160px;
+			vertical-align: middle;
+			@include desktop {
+				width:115px;
+				height:115px;
+			}
+			@include mobile {
+				width:80px;
+				height:80px;
+			}
+		}
+
+		span.bi1des,
+		span.cod1des {
+			display: inline-block;
+			width: 260px;
+			padding-left: 10px;
+			vertical-align: middle;
+			a {
+				color: #1e98b2;
+				font-weight: bold;
+			}
+			@include desktop {
+				width: 450px;
+			}
+			@include mobile {
+				width: 250px;
+				font-size: 0.8em;
+				padding-left: 10px;
+			}
+			@include smaller_mobile {
+				width: 190px;
+			}
+		}
+	}
+}
+

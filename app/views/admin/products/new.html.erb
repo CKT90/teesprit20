@@ -1,0 +1,39 @@
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item" style="color: #43aef0;"><%= link_to "Product Index", admin_products_path %></li>
+    <li class="breadcrumb-item active" aria-current="page"> New Product </li>
+  </ol>
+</nav>
+
+
+<% provide(:title, 'Products') %>
+<div class="cardboard col-lg-6 col-lg-offset-3">
+  <div class="col-lg-12">
+    <div class="row">
+      <%= render "shared/error_messages", :target => @product %>
+
+        <%= form_for [:admin, @product], :html => {multipart:true} do |f| %>
+
+          <%= f.label :title %>
+          <%= f.text_field :title, class: 'form-control' %>
+
+          <%= f.label :description %>
+          <%= f.text_area :description, :rows => 6, class: 'form-control' %>
+
+          <%= f.label :option_type_ids %>
+          <%= f.select :option_type_ids, @ProperOptionType.map { |ot| ["#{ot.presentation} (#{ot.name})", ot.id] }, {}, {:include_blank => false,  multiple: true, class: "select2"} %>
+
+          </br>
+          </br>         
+          <%= f.submit "Create product", class: "btn btn-primary" %>
+
+        <% end %>
+      </div>
+      </div>
+  </div>
+
+
+
+
+

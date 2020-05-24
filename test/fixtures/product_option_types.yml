@@ -1,0 +1,11 @@
+dog_color:
+  product: dog
+  option_type: color
+
+bear_gender_color:
+  product: bear
+  option_type: 
+    - color
+    - gender 
+
+    

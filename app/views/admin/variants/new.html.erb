@@ -1,0 +1,33 @@
+<% provide(:title, 'Variants') %>
+
+  <h1>Products</h1>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+      <%= render "shared/error_messages", :target => @variant %>
+
+
+        <%= form_for [:admin, @product, @variant], :html => {multipart:true}, url: admin_product_variant_create_path do |f| %>
+
+
+          <%= f.label :count_on_hand, 'stock' %>
+          <%= number_field_tag 'variant[count_on_hand]', 1, min: 1, step: 1, class:"form-control" %>
+
+          <%= f.label :cost_price, 'cost price' %>
+          <%= f.text_field :cost_price, class: 'form-control'%>
+
+          <%= f.label :price, 'price' %>
+          <%= f.text_field :price, class: 'form-control' %>
+          
+          <%= f.file_field :image %>
+
+          <% @product.option_types.each do |option_type| %>
+            <%= label :new_variant, option_type.presentation %>
+            <%= f.collection_select 'option_value_ids', option_type.option_values, :id, :presentation,
+            { include_blank: true }, { name: 'variant[option_value_ids][]', class: 'select2' } %>
+          <% end %>
+
+          <%= f.submit "Create variant", class: "btn btn-primary" %>
+
+        <% end %>
+      </div>
+    </div>

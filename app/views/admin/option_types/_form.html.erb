@@ -1,0 +1,40 @@
+
+<% provide(:title, 'Edit Option Type') %>
+
+<h1 style="text-align: center; font-weight: bold; margin-bottom: 40px;"><%= link_to "NEW OPTION TYPES", admin_option_types_path %></h1>
+
+<div class="col-lg-6 col-lg-offset-3">
+    
+  <%= form_for [:admin, @option_type] do |f| %>
+    <%= render "shared/error_messages", :target => @option_type %>
+
+    <div class="OT_details">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+
+      <%= f.label :presentation %>
+      <%= f.text_field :presentation, class: 'form-control' %>
+    </div>
+
+    <div style="padding-top: 30px;">
+      <table class="table">
+  			<thead class="thead-inverse">
+    			<tr>
+    				<th style="width: 50%; padding-left: 35px;">Name</th>
+    				<th style="width: 50%;">Presentation</th>
+    			</tr>
+  			</thead>
+  		</table>
+    </div>
+
+    <ul id="option_values" data-update-url="<%= update_values_positions_admin_option_types_url %>">
+  		<%= f.fields_for :option_values do |builder| %>
+    			<%=render 'option_value_fields', f: builder %>
+  		<% end %>
+    </ul>
+
+    <%= link_to_add_fields '<i class="fa fa-plus-circle"></i>'.html_safe, f, :option_values%>
+    <%= f.submit "Update Option Type", class: "btn btn-primary" %>
+
+  <% end %>
+</div>

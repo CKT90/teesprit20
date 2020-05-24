@@ -1,0 +1,143 @@
+
+p.instock {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	font-size: 15px;
+	padding: 5px;
+	border-radius: 0 0 10px 0;
+	background-color: #ffc167;
+	color: #fff;
+	z-index: 10;
+}
+
+p.outstock {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	font-size: 15px;
+	padding: 5px 10px 5px 5px;
+	border-radius: 0 0 5px 0;
+	background-color: #fe766a;
+	color: #fff;
+	z-index: 10;
+}
+
+.store {
+
+	 h1 {
+		font-family: edo;
+		font-size: 80px;
+		text-align: center;
+	}
+}
+
+.thumbnail {	
+	position:relative;
+    margin-bottom: 20px;
+    padding: 0px;
+    border: 0px;
+    width: auto !important;
+    background-color: #cad0cf;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    box-shadow: 0 0.5px 4px 0 rgba(0, 0, 0, 0.2);
+    transition: all .5s;
+	&:hover {
+		box-shadow: 0 0px 6px 3px rgba(0, 0, 0, 0.2);
+		transition: all .5s;
+	}
+
+    .product_image{
+    	position: relative;
+    	max-width: 370px;
+    	@include desktop {
+    		max-width: 330px;
+    	}
+    	@include mobile {
+    		max-width: 400px;
+    	}
+    }
+
+    .product_title p {
+    	padding: 10px 5px 5px 13px;
+    	margin: 0px;
+    	font-weight: bold;
+        font-size: 1.2em;
+        @include mobile {
+        	text-align: center;
+        }
+    	a {
+    		&:hover {
+    			text-decoration: none;
+    		}
+    	}	
+    	p {
+    		@include mobile {
+    			padding: 10px;
+    		}
+    	}
+    }
+
+
+    .product_details  {
+    	position: relative;
+    	overflow: hidden;
+
+    	.store_description {
+    		padding-bottom: 10px;
+    		line-height: 16px;
+	    	span {
+	    		font-size: 0.9em;
+	    		color: #1d454f;
+	    	}
+	    	@include mobile {
+	    		padding: 0 15px  10px 15px;
+	    		text-align: center;
+	    	}
+	    }
+
+	    div.store_price {
+	    	margin-bottom: 10px;
+	    	padding: 0px;
+	    	position: relative;
+	    	text-align: right;
+	    	font-family: sans-serif;
+	    	@include mobile {
+	    		margin-bottom: 0px;
+		    	float:left;
+		    	text-align: center;
+		    	width: 100% !important;
+		    	background-color: #009391;
+	    	}
+	    	span { 
+	    		font-size: 1.5em;
+	    		background-color: #009391;
+	    		padding: 3px 5px 3px 5px;
+	    		border-radius: 5px;
+	    		color: #f9f9ed;
+	    		font-weight: bold;
+	    		margin-right: 10px;
+	    		@include desktop {
+	    			font-size: 1.1em;
+	    		}
+	    		@include mobile {
+	    			font-size: 1.25em;
+		    		background-color: transparent;
+		    		border-radius: 0px;
+		    		width: 100% !important;
+		    		margin-right: 0px;
+	    		}
+	    	}
+	    }
+    }
+
+}
+
+
+.col-xs-6 {
+	@include mobile {
+		width: 100% !important;
+	}
+}

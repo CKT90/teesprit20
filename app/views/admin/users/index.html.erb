@@ -1,0 +1,48 @@
+
+
+<h1 style="font-weight: bold; margin-bottom: 25px;">
+  All Users <%= link_to '<i class="fa fa-plus-circle"></i>'.html_safe, new_admin_user_path, title: "New User", data: {toggle: 'tooltip', placement: "right" } %>
+</h1>
+
+<div class="cardboard">
+<table class="table user_table">
+  <thead>
+    <tr>
+      <th style="width: 15%;">Name</th>
+      <th style="width: 25%;">Email</th>
+      <th style="width: 15%; text-decoration: underline;"><%= sort_link @search, :created_at, "Date Joined" %></th>
+      <th style="width: 15%;">Options</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%= will_paginate %>
+    <% @users.each do |user| %>
+      <tr>
+        <td>
+          <%= link_to user.name, edit_admin_user_path(user) %>
+          <% if user.admin? %>
+            <span style="background-color: #f0a305; padding: 3px; color: #fff; font-size: 0.8em;" >ADMIN</span>
+          <% end %>
+        </td> 
+        <td><%= user.email %></td> 
+        <td><%= user.created_at.strftime('%d %b %Y / %H:%M') %></td>
+
+        <td class="glyph">
+          <%= link_to edit_admin_user_path(user), :method => :get, title: "Manage User", data: {toggle: 'tooltip', placement: "top" } do %>
+            <i class="btn btn-primary glyphicon glyphicon-duplicate"></i>
+          <% end %>
+        </td>
+
+      </tr>
+    <% end %>
+    
+  </tbody>
+
+</table>
+<%= will_paginate %>
+</div>
+
+
+
+

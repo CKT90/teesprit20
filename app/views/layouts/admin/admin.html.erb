@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<title><%= full_title(yield(:title)) %></title>
+		<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+		<meta name="turbolinks-cache-control" content="no-cache">
+		<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+		<%= csrf_meta_tags %>
+		<%= javascript_pack_tag 'application' %>
+		<%= favicon_link_tag asset_path('teelogo.png') %>
+		<%= render 'layouts/shim' %>
+	</head>
+
+	<body class="admin <%= controller_name %> <%= action_name %>">
+		<%= render 'layouts/admin/header' %>
+	    <div id="page-content-wrapper">
+	    	<% flash.each do |message_type, message| %>
+				<div class="alert alert-<%= message_type %>" id="flash"><%= message %></div>
+			<% end %>
+			<%= yield %>
+		</div>
+	</body>
+</html>

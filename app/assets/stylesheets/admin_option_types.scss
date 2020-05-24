@@ -1,0 +1,39 @@
+// Place all the styles related to the OptionTypes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+input.ov_name,
+input.ov_pres {
+	display: inline-flex;
+	clear: both;
+	width: 47%;
+}
+
+
+.option_types.edit {
+	i.fa-plus-circle {
+		position: relative;
+		left: 47%;
+		font-size: 50px;
+		background: -webkit-linear-gradient(45deg, #fc4a1a, #f7b733 );
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		margin-bottom: 10px;
+	}
+}
+
+
+.ot_table {
+	margin-top: 50px;
+
+	.ot-btn {
+		color: #fff;
+		background: linear-gradient(to right, #ff7e5f, #feb47b);
+		transition: 0.8s;
+		font-weight: bold;
+		&:hover{
+			background: linear-gradient(to right, #00b09b, #96c93d);
+		}
+	}
+}

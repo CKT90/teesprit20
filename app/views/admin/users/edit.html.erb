@@ -1,0 +1,56 @@
+<% provide(:title, "Edit user") %>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item" style="color: #43aef0;"><%= link_to "User Index", admin_users_path %> </li>
+    <li class="breadcrumb-item active" aria-current="page"> <%= @user.name %>(<%= @user.email %>)</li>
+  </ol>
+</nav>
+
+
+<div class="col-lg-6">
+	<div class="col-lg-12 cardboard">
+		<%= form_for @user do |f| %>
+
+			<%= render "shared/error_messages", :target => @user %>
+
+			<%= f.label :name %>
+			<%= f.text_field :name, class: 'form-control' %>
+
+	      	<%= f.label :admin, class: "checkbox inline" do %>
+	      	<%= f.check_box :admin %>
+	      	<span>Admin</span>
+	      	<% end %>
+
+			<%= f.submit "Save changes", class: "btn btn-primary btn-submit" %>
+
+		<% end %>
+	</div>
+</div>
+
+
+<div class="col-lg-6 user_order">
+	<div class="col-lg-12 cardboard user_order_table">
+		<table class="table">
+			<thead>
+			    <tr>
+			      <th style="width: 25%; text-decoration: underline;"><%= sort_link @search, :created_at, "Date Created" %></th>
+			      <th style="width: 25%;">Order No.</th>
+			      <th style="width: 15%;">Amount</th>
+			    </tr>
+			</thead>
+
+			<tbody>
+			    <% @orders.each do |order| %>
+			      <tr>
+			      	<td><%= order.created_at.strftime('%d %b %Y %H:%M') %></td>
+			        <td style="color:#1e98b2;"><%= link_to order.number, admin_order_manage_order_path(order) %></td> 
+			        <td class="total_cell"><%= number_to_currency(order.total_price, unit: "RM") %></td> 
+			      </tr>
+			    <% end %>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+

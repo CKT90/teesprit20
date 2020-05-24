@@ -1,0 +1,80 @@
+
+.a_center {
+	text-align: center;
+}
+
+.breadcrumb {
+	font-weight: bold;
+}
+
+.admin.products.deleted_index,
+.admin.orders.deleted_index,
+.admin.orders.index,
+.admin.users.index,
+.admin.variants.manage,
+.admin.products.index {
+	.cardboard {
+		padding: 0px;
+	}
+
+	.order_table,
+	.user_order_table,
+	.user_table,
+	.variant_table,
+	.product_table {
+		font-size: 14px;
+		thead {
+			background-color: #3b3b3b;
+			color: #fff;
+			a {
+				transition: 0.5s;
+				&:focus,
+				&:hover {
+					color: #ffb38f;
+				}
+			}
+		}
+
+		td {
+			vertical-align: middle;
+		}
+	}
+
+	img {
+		/* height: 100%; */
+		width: 100%;
+	}
+
+	i.fa-plus-circle {
+		transition: 0.8s;
+		opacity: 0.4;
+		background: -webkit-linear-gradient(45deg, #fc4a1a, #f7b733 );
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		&:hover {
+	        opacity: 1.0;
+	    }
+	}
+
+	img {
+		max-width: 85px;
+	}
+}
+
+
+
+.cardboard {
+	display: block;
+	border-radius: 3px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	padding: 5px 15px 30px 15px;
+	font-weight: bold;
+	margin-bottom: 15px;
+}
+
+.btn-submit {
+	width: 25%;
+	@include tablet {
+		width: 100%;
+	}
+}

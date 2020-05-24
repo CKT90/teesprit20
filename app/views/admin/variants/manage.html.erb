@@ -1,0 +1,60 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item" style="color: #43aef0;"><%= link_to "Product Index", admin_products_path %></li>
+    <li class="breadcrumb-item" style="color: #43aef0;"><%= link_to @product.number.capitalize, edit_admin_product_path(@product) %></li>
+    <li class="breadcrumb-item active" aria-current="page">Variants </li>
+  </ol>
+</nav>
+
+<div class="cardboard">
+  <table class="table variant_table">
+    <thead>
+      <tr>
+        <th style="width: 15%;">SKU</th>
+        <th style="width: 15%;">Image</th>
+        <th style="width: 20%;">Option Values</th>
+        <th class="a_center" style="width: 15%;">Cost</th>
+        <th class="a_center" style="width: 15%;">Price</th>
+        <th class="a_center" style="width: 10%;">Quantity</th>
+        <th class="a_center" style="width: 10%;">Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @product.variants.each do |variant| %>
+        <tr>
+          <td style="color: #1d454f; font-weight: bold;"><%= link_to variant.SKU, edit_admin_product_variant_path(@product, variant) %></td>
+
+          <td style="text-align: left;">
+            <% if variant.images.any? %>
+              <%= image_tag variant.images.first.image_url(:thumb) %>
+            <% else %>
+              <span style="background-color: #ff695a; width: 70px; color: #fff; padding: 5px; border-radius: 3px; text-align: left;"> No Image </span>
+            <%end%>
+          </td>
+
+          <td><% variant.option_values.each do |vov| %> 
+              <li><%= vov.name %> (<%= vov.presentation %>)</li>
+              <% end %> 
+          </td>
+
+          <td class="a_center" style="font-weight: normal;" ><%= best_in_place [:admin, @product, variant], :cost_price, :display_with => :number_to_currency, :helper_options => {:unit => "RM"} %></td>
+          
+          <td class="a_center" style="font-weight: normal;" ><%= best_in_place [:admin, @product, variant], :price, :display_with => :number_to_currency, :helper_options => {:unit => "RM"} %></td>
+
+          <td class="a_center" style="font-weight: normal;" ><%= best_in_place [:admin, @product, variant], :count_on_hand %></td>
+          
+          <td class="a_center glyph" style="width: 10%;">
+            <%= link_to edit_admin_product_variant_path(@product, variant), title: "Manage", data: {toggle: 'tooltip', placement: "top" } do %>
+              <i class="btn btn-success glyphicon glyphicon-book"></i>
+            <% end %>
+          </td>
+
+          <% end %>
+        </tr>
+    </tbody>
+  </table>
+</div>
+
+                
+ 

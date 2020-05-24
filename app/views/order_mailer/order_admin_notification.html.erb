@@ -1,0 +1,118 @@
+<div  class=" order_sum" style= "font-family: calibri; text-align: center; color: #000;">
+
+<p> Hi, </p>
+
+<p> New order created! <br>
+Order Number <span class="order_no"><%= @order.number %></span> had been accepted for processing. <br>
+Below are the summary of this order: </p>
+
+	<table style="border-collapse: collapse !important; margin: auto;">
+	  <thead style="background-color: #1e98b2; color: #fff; ">
+        <tr >
+          <th style="width: 150px; text-align: center; padding-top:7px; padding-bottom:7px;">Item</th>
+          <th style="width: 150px;"></th>
+          <th style="width: 150px; text-align: center; padding-top:7px; padding-bottom:7px;">Subtotal Price</th>
+        </tr>
+      </thead>
+	
+      <tbody>
+        <% @order.line_items.each do |item| %>
+          <tr>
+          	<td> 
+          		<% if item.variant.images.blank? %>
+			      <% if Product.find_by(id: item.variant.product_id).images.any? %>
+			      	<%= image_tag(Product.find_by(id: item.variant.product_id).images.first.image_url, style: "height: 120px; width: 120px;") %>
+			      <% else %>
+          			<%= image_tag("http://res.cloudinary.com/dvmad09wh/image/upload/v1507308285/img2_gxalse.jpg", alt: "noimage", style: "height: 120px; width: 120px;") %>
+          		  <%end%>
+          		<% else %>
+          			<%= image_tag(item.variant.images.first.image_url, :style => "height: 120px; width: 120px;") %>
+          		<% end %>
+          	</td>
+            <td style="text-align: left; float: left; padding-top: 10px;"><span style="color:#1e98b2;"><%=item.variant.SKU %></span><br>
+            	Quantity: <%= item.quantity %><br>
+            	Unit Price: <span style="font-weight:bold"><%= number_to_currency(item.final_price, unit:"RM") %> </span></td>
+            <td style="color:#000; text-align: center; padding-top:7px; padding-bottom:7px; vertical-align: top; font-weight: bold;"><%= number_to_currency(item.total_final_price, unit:"RM") %>
+            	</td>
+    	    </tr>
+    	  <% end %>
+
+          <tr style="background-color: #f9f9ed; ">
+       		  <td class="total_cell" colspan="2" style="color:#000; text-align: right; padding-right: 10px; padding-top:7px; padding-bottom:7px; font-weight: bold;">Delivery to <%= @order.states %> </td>
+      	      <td class="total_cell" style="color:#000; text-align: center; padding-top:7px; padding-bottom:7px; font-weight: bold;"><%= number_to_currency(@order.delivery_cost, unit: "RM") %></td>
+      	  </tr>
+
+          <tr style="background-color: #f2f2f2; ">
+       		  <td class="total_cell" colspan="2" style="color:#000; text-align: right; padding-right: 10px; padding-top:7px; padding-bottom:7px; font-weight: bold;">Total</td>
+      	      <td class="total_cell" style="color:#000; text-align: center; padding-top:7px; padding-bottom:7px; font-weight: bold;"><%= number_to_currency(@order.total_price, unit: "RM") %></td>
+      	  </tr>
+      </tbody>
+    </table>
+
+    <p> Auto generated, <br>
+    Teesprit Malaysia </p>
+    </span>
+   </div>
+
+
+
+<style type="text/css">
+
+
+	table {
+		border-collapse: collapse !important;
+		font-size: 14px !important;
+	}
+
+	th {
+		padding: 7px 1px 7px 1px;
+		text-align: center;
+	}
+
+	td {
+		padding: 7px 1px 7px 1px;
+		text-align: center;
+	}
+
+	.codcon,
+	.bicon {
+		height: 100px;
+		width: 100px;
+		display: inline-block;
+		float: left;
+	}
+
+	.cod,
+	.bi {
+		padding-left: 20px;
+		padding-right: 30px;
+		overflow: hidden;
+		display: inline-block;
+		border: 1px solid #cad0cf;
+		border-radius: 15px;
+	}
+
+	.cod1des,
+	.bi1des {
+		display: inline-block;
+		float: left;	
+		width: 250px;
+		padding-left: 15px;
+		vertical-align: middle;
+	}
+
+	.creamy {
+		display: block;
+		width: 100%;
+		overflow: hidden;
+		margin-bottom: 30px;
+	}
+
+	.titlecod,
+	.titlebi {
+		font-size: 1.4em;
+		text-decoration: underline;
+	}
+
+</style>
+

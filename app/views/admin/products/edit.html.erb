@@ -1,0 +1,110 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item" style="color: #43aef0;"><%= link_to "Product Index", admin_products_path %></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= @product.number.capitalize %> </li>
+  </ol>
+</nav>
+
+<% provide(:title, 'Edit Products') %>
+
+<div class="col-lg-6">
+  <div class="cardboard col-lg-12">
+
+    <p class="subtle_text"> Product ID </p>
+
+    <h1> <%= @product.number.capitalize %> 
+      <%= link_to admin_product_remove_path(@product), :method => :put, title: "Remove", data: { confirm: 'Are you sure?', toggle: 'tooltip', placement: "top" } do %>
+        <i class="btn btn-danger glyphicon glyphicon-remove"></i>
+      <% end %>
+    </h1>
+
+    <br>
+
+    <div class="subsection">
+      <p class="subtle_text"> </i> Variants</p>
+      <span><%= link_to "Manage", admin_product_variant_management_path(@product) %> </span>
+    </div>
+
+    <br>
+
+    <div class="subsection">
+      <p class="subtle_text"> Option Types </p>
+      <ul id="option_types_sortable" data-update-url="<%= update_options_positions_admin_option_types_url %>">
+        <% @product.option_types.each do |type| %>
+          <li id="entry_<%=type.id%>" class="product_option_type_visibility_option">
+            <span class="handle"><i class="fa fa-arrows-v"></i></span>
+            <span>
+              <%= type.presentation %> (<%= type.name %>)
+            </span>
+            <span>
+            <%= react_component("react_components/Checkbox", { attribute: "#{ProductOptionType.find_by(option_type_id: type.id, product_id: @product.id).hidden}", trueValue: "false", trueName: "Visible",  falseValue: "true", falseName: "Hidden", title: "testing_only", postUrl: "/admin/update_ot_test/#{@product.id}/#{type.id}" }) %>  
+            </span>
+         </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+
+    
+  <div class="cardboard col-lg-12">
+
+    <p ><h1 style="color: #737373;"> <i class="fa fa-cog"></i> General Setup </h1></p>
+
+    <%= render "shared/error_messages", :target => @product %>
+    <%= form_for [:admin, @product], :html => {multipart:true} do |f| %>
+
+      <%= f.label :number %>
+      <%= f.text_area :number, class: 'form-control' %>
+
+      <%= f.hidden_field :id, :value => @product.id %>
+      <%= f.label :title %>
+      <%= f.text_field :title, class: 'form-control' %>
+
+      <%= f.label :description %>
+      <%= f.text_area :description, :rows => 6, class: 'form-control' %>
+
+      <%= f.label :available_on, "Available On:" %>
+      <%= f.text_field :available_on, class: 'form-control',:include_blank => true, :value => @product.available_on.try(:strftime, "%Y-%m-%d") unless f.object.new_record? %>
+
+      <%= f.label :discontinue_on, "Discontinue On:" %>
+      <%= f.text_field :discontinue_on, class: 'form-control',:include_blank => true, :value => @product.discontinue_on.try(:strftime, "%Y-%m-%d") unless f.object.new_record? %>
+
+      <%= f.submit "Update Product", class: "btn btn-primary btn-submit" %>
+  </div>
+</div>
+
+
+
+
+<div class="col-lg-6">
+  <div class="col-lg-12">
+    <div class="image_loader_top">
+      <%= f.fields_for :images, @product.images.build, :html => {multipart:true} do |builder| %>
+        <%= builder.label :image, "upload images:" %>
+        <%= builder.file_field :image, multiple: true, name: "product[images_attributes][]"%>
+      <% end %>
+    </div>
+
+    <div class="image_loader_bottom">
+      <div id="toload">
+        <% if @images.count > 0 %>
+          <%= render partial: "admin/products/image", locals: {image: @images} %>
+        <% else %>
+         <p style="background-color: #90c5c7; padding: 5px 10px 5px 10px; display: inline-block; color: #fff;"> No images, upload now! </p>
+        <% end %>
+      </div>
+      <div id="walao"></div>
+    </div>
+    <% end %>
+
+  </div>
+</div>
+
+
+<script id="template-upload" type="text/x-tmpl">
+  <div class="upload">
+    <div class="progress"><div class="bar" style="width: 0%"></div></div>
+  </div>
+</script>
+

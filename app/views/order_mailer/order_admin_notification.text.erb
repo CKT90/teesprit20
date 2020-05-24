@@ -1,0 +1,42 @@
+Hi <%= @order.name %>
+
+Thanks for your order!
+Your Order Number <%= @order.number %> is currently in processing.
+
+Your ordered items:
+
+<% @order.line_items.each do |item| %>
+SKU: <%= item.variant.SKU %>
+Quantity: <%= item.quantity %>
+Unit Price: <%= number_to_currency(item.final_price, unit:"RM") %>
+Total Price: <%= number_to_currency(item.total_final_price, unit:"RM") %>
+<% end %>
+
+Payment Method: <%= @order.pay_type %> 
+____________________________________________________________________
+<% if @order.pay_type == "Bank-in (Delivery)" %>
+
+Delivery to <%= @order.states %> 
+Delivery cost: <%= number_to_currency(@order.delivery_cost, unit:"RM") %>
+Grand Total: <%= number_to_currency(@order.total_price, unit:"RM") %>
+
+<% elsif @order.pay_type == "Cash on Delivery (COD)" %>
+
+Grand Total: <%= number_to_currency(@order.total_price, unit:"RM") %>
+
+<% elsif @order.pay_type == "Credit Card" %>
+
+Grand Total: <%= number_to_currency(@order.total_price, unit:"RM") %>
+
+<% elsif @order.pay_type == "Paypal" %>
+
+Grand Total: <%= number_to_currency(@order.total_price, unit:"RM") %>
+Transaction ID: <%= @order.paypal_transaction_id %> 
+
+<% end %> 
+____________________________________________________________________
+
+Kindly process the order.
+
+Auto Generated,
+Teesprit Malaysia

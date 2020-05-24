@@ -1,0 +1,14 @@
+
+<li id="entry_<%= f.object.id  %>" class="property_form">
+
+
+    <%= f.text_field :name, class: 'form-control' %>
+    <%= f.text_field :value, class: 'form-control' %>
+
+    <%= f.hidden_field :_destroy %>
+    <%= link_to "remove", '#', class: "remove_fields" %>
+
+</li>
+
+
+

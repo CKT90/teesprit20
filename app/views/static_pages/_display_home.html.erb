@@ -1,0 +1,10 @@
+
+   
+<div class="show_image">
+    <% if target.images.any? %>
+      <%= link_to image_tag(target.images.first.image_url(:store)), target %>
+    <% else %>
+      <%= link_to image_tag("img2.png", alt: "Upload Image Here!"), target %>
+    <%end%>
+</div>
+

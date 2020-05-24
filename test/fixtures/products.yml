@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+dog:
+  title: Dog
+  description: Cute Dog
+
+bear:
+  title: Bear
+  description: Cute Bear
+
+ruby:
+  title: Ruby
+  description: Cute Ruby

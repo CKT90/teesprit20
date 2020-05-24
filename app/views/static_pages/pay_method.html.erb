@@ -1,0 +1,57 @@
+<% provide(:title, "Payment") %>
+<div class="payment_method">
+
+	<div class="cod col-lg-12">
+	<h1 style="margin: 0px;"><p class="titlecod"> Cash On Delivery (COD) </p></h1><br/>
+		<div class="col-lg-4 creamy">
+			<%= image_tag("cod11.png", alt: "COD", class: "codcon") %>
+			<span class="cod1des"> Select Cash On Delivery (COD) as payment option. Note that COD are only available within Klang Valley area.</span>
+		</div>
+
+		<div class="col-lg-4 creamy">
+			<%= image_tag("cod12.png", alt: "COD", class: "codcon") %>
+			<span class="cod1des"> We will Whatsapp and email you to communicate COD location. COD location are as followed or within Klang Valley: </br>
+			<i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp;<a href="https://www.google.com/maps/dir/''/Publika+Shopping+Gallery,+1,+Jalan+Dutamas+1,+Solaris+Dutamas,+50480+Kuala+Lumpur,+Federal+Territory+of+Kuala+Lumpur/data=!4m5!4m4!1m0!1m2!1m1!1s0x31cc485e0e965a21:0xd5fc2d7f9da12334?sa=X&ved=0ahUKEwj7u87qxozZAhVEMY8KHTyaBEQQiBMITjAA">Publika</a></br>
+			<i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp;<a href="https://www.google.com/maps/dir/''/mytown+cheras/data=!4m5!4m4!1m0!1m2!1m1!1s0x31cc363dccb07b07:0x959c26a50325031d?sa=X&ved=0ahUKEwjYkJ-ix4zZAhUHPI8KHRCsD0oQ9RcIkAEwEA">MyTown, Cheras</a></br>
+			<i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp;<span style="font-style: italic;">Other KV Area</span>
+			</span>
+		</div>
+
+
+		<div class="col-lg-4 creamy">
+			<%= image_tag("cod13.png", alt: "COD", class: "codcon") %>
+			<span class="cod1des"> Meet at designated location. Inspection by buyer and cash transaction once buyer satisfied with the product. Further assistance needed please contact us from <%= link_to "here!", contact_path %> Comes with 7 days no question return (with full amount).
+			</span>
+		</div>
+
+	</div>
+
+
+	<div class="bi col-lg-12">
+	<h1 style="margin: 0px;"><p class="titlebi"> Bank-in (Delivery)</p></h1><br/>
+		<div class="col-lg-4 creamy">
+			<%= image_tag("cod11.png", alt: "delivery", class: "bicon") %>
+			<span class="bi1des"> Select bank-in as payment option. Delivery available nationwide with following rate: </br>
+			<i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp; Northen region - RM10</br>
+			<i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp; Southern region - RM10</br>
+			<i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp; Klang Valley - Free</br>
+			<i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp; West Malaysia - RM12 
+			</span>
+		</div>
+
+		<div class="col-lg-4 creamy">
+			<%= image_tag("cod12.png", alt: "COD", class: "bicon") %>
+			<span class="bi1des"> We will Whatsapp and email you bank-in details. Pease insert <span style="font-weight: bold;">order number </span> as reference and you may inform us once transaction is done.
+			</span>
+		</div>
+
+
+		<div class="col-lg-4 creamy">
+			<%= image_tag("bi13.png", alt: "COD", class: "bicon") %>
+			<span class="bi1des"> Once payment is confirmed, item will be shipped out to buyer's designated address. Return/refund or any further assistance needed please contact us from <%= link_to "here!", contact_path %> Free Delivery in Klang Valley area with 7 days no question return (refund value exclude delivery fees).
+			</span>
+		</div>
+
+	</div>
+
+</div>

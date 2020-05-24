@@ -1,0 +1,12 @@
+  <ul id="image_sortable" data-update-url="<%= update_variant_image_positions_admin_product_variants_url %>">
+  <% image.each do |image| %>
+  <li id="entry_<%=image.id%>" class="image_hover_class">
+  <%= image_tag image.image_url(:product_edit).to_s %>
+
+  <%= link_to [:admin, @product, @variant, image], method: :delete, remote: true, class: 'disable_link delete_image', title: "Delete", data: { confirm: 'Are you sure?', toggle: 'tooltip', placement: "top" } do %>
+      <i class="btn btn-danger glyphicon glyphicon-remove disable_link"></i>
+    <% end %>
+
+  </li>
+  <%end%>
+  </ul>

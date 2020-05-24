@@ -1,0 +1,54 @@
+<% provide(:title, 'Variants') %>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item" style="color: #43aef0;"><%= link_to "Product Index", admin_products_path %></li>
+    <li class="breadcrumb-item" style="color: #43aef0;"><%= link_to @product.number.capitalize, edit_admin_product_path(@product) %></li>
+    <li class="breadcrumb-item" style="color: #43aef0;"><%= link_to "Variant Management", admin_product_variant_management_path(@product) %></li>
+    <li class="breadcrumb-item active" aria-current="page"> <%= @variant.SKU.capitalize %></li>
+  </ol>
+</nav>
+
+<div class="col-lg-6">
+  <div class="col-lg-12 cardboard">
+    <%= render "shared/error_messages", :target => @variant %>
+    <%= form_for [:admin, @product, @variant], :html => {multipart:true} do |f| %>
+
+      <%= f.label :SKU, 'SKU' %>
+      <%= f.text_field :SKU, class: "form-control" %>
+
+      <%= f.label :count_on_hand, 'Stock' %>
+      <%= number_field_tag 'variant[count_on_hand]', @variant.count_on_hand, min: 0, step: 1, class: "form-control" %>
+
+      <%= f.label :price, 'Price (RM)' %>
+      <%= f.text_field :price, class: 'form-control' %>
+
+      <%= f.label :cost_price, 'Cost (RM)' %>
+      <%= f.text_field :cost_price, class: 'form-control' %>
+
+      <%= f.label :description %>
+      <%= f.text_area :description, :rows => 6, class: 'form-control' %>
+
+      <%= f.submit "Update variant", class: "btn btn-primary btn-submit" %>
+  </div>
+</div>
+
+<div class="col-lg-6">
+  <div class="col-lg-12">
+    <p style=" font-weight: bold; color: white; background-color: #ff8c00; padding: 5px 10px 5px 10px; margin-top:10px;"> SELECTED IMAGES </p>
+
+    <% @variant.images.each do |image| %>
+      <%= image_tag image.image_url(:product_edit).to_s, {class: 'vima'} %>
+    <% end %>
+
+    <p style=" font-weight: bold; color: white; background-color: #999999; padding: 5px 10px 5px 10px; margin-top:20px;"> IMAGE SELECTION </p>
+
+      <% @product.images.each do |image| %>
+        <%= image_tag image.image_url(:product_edit).to_s, {class: 'vima'} %>
+        <%= check_box_tag 'variant[image_ids][]', image.id %>
+      <% end %>
+
+    <% end %>
+  </div>
+</div>
+

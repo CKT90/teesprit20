@@ -1,0 +1,92 @@
+<% provide(:title, Cart) %>
+
+<div class = "cart_page">
+  <div class="container">
+    <div class="col-lg-8 col-md-8 col-xs-12">
+      <h1>My Cart</h1>
+		<% if @cart.line_items.empty? %>
+		  <p class="empty_cart"> Your cart is empty, start shopping <%= link_to "HERE!", store_url, class:"here" %> </p>
+		<% else %>
+		  <%= form_tag update_multiple_line_items_path, :method => :put do  %>
+			<table class="table">
+			  <% @cart.line_items.each do |item| %>
+				<tr>
+
+				  <td class="cart_images">  <!-- 1st TD -->
+				  <div class="outer">
+					<% if item.variant.images.any? %>
+					  <%= image_tag(item.variant.images.first.image_url) %>
+				    <% else %>
+				      <% if Product.find(item.variant.product_id).images.any? %>
+				      	<%= image_tag(Product.find(item.variant.product_id).images.first.image_url) %>
+				      <% else %>
+					  	<%= image_tag("img2.png", alt: "Upload Image Here!")%>
+					  <% end %>
+				    <%end%>	
+				    </div>						
+				  </td>
+
+				  <td class="mid_column"> <!-- 2nd TD -->
+					<span class="item_title"><%=link_to "#{Product.find(item.variant.product_id).title}", product_path(Product.find(item.variant.product_id).number) %> </span>
+					<span class="option_types_cart"><% item.variant.option_values.each do |cot| %> 
+					  <ul>
+					      <li><span class="cart_ov"><%= cot.presentation %></span></li>
+					  </ul>
+					  <%end%>
+					</span>
+					<span class="cart_description"> <%= truncate(item.variant.description, length:300) %></span>
+					<span class="unit_quantity">
+						<span class="cart_unit_price"><%= number_to_currency(item.variant.price, unit: "RM") %> x &nbsp;</span> 
+						<%= fields_for "line_item[]", item do |f| %>
+						  <div class="quantity_design" id="cart_quantity_selection_<%="#{item.id}"%>">
+	          			    <div class="cart-quantity-down" id="<%="#{item.id}" %>" >-</div>
+	            		      <%= f.number_field 'quantity', min: 1, max: item.variant.count_on_hand, step: 1, class: "cart_quantity form-control" %>
+	          			     <div class="cart-quantity-up" id="<%="#{item.id}" %>" >+</div>
+	       				  </div>
+		       			<%end%>
+
+	   				</span>
+				  </td>
+			
+
+				  <td class="item_price"> <!-- 3rd TD -->
+   				    <span class="top">
+   				    	<span class="sub_total">Sub Total</span><span class="total_unit_cart_price"> <%= number_to_currency(item.total_price, unit: "RM") %></span>
+   				    </span>
+   				   	<span class="bottom">
+					   <%= link_to item, method: :delete, data: { confirm: 'Are you sure?' }, class:"delete_cart_item" do %>
+	          				<i class="btn glyphicon glyphicon-remove"></i>
+	        			<% end %>
+	        		</span>
+				  </td>
+			    </tr>
+
+		      <% end %>
+
+			  <tr class="total_line">
+				 	<td colspan="2">Total</td>
+					<td class="total_cell"><%= number_to_currency(@cart.total_price, unit:"RM") %></td>
+		      </tr>	
+			</table>
+
+			<%= button_tag(type: "submit", class: "update_cart") do %>
+    			<i class="fa fa-upload" aria-hidden="true"></i> Update Cart 
+			<% end %>
+		  <%end%>
+    </div>	
+
+	<div class="col-lg-4 col-md-4 col-xs-12 cart_summary_info">
+		<span> SUMMARY </span>
+		<table class="table">
+		    <tr>
+			 	<td class="line_one">Total</td>
+				<td class="line_two"><%= number_to_currency(@cart.total_price, unit: "RM") %></td>
+			</tr>
+		</table>
+		<%= button_to "Checkout", new_order_path, method: :get, class:"checkout_button" %>
+	    <%= button_to 'Empty cart', { id: @cart.id }, method: :delete, data: { confirm: 'Are you sure?' }, class:"empty_cart_button" %>
+		<%end%>
+    </div>
+  </div>
+</div>
+

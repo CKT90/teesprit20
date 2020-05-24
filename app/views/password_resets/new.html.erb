@@ -1,0 +1,19 @@
+<% provide(:title, "Forgot password") %>
+<div class="password_reset">
+
+
+	<div class="col-lg-4 col-lg-offset-4 col-sm-12 ">
+		<h1>Forgot password</h1>
+
+		<%= form_for(:password_reset, url: password_resets_path) do |f| %>
+		<%= f.label :email %>
+		<%= f.email_field :email, class: 'form-control' %>
+		<%= f.submit "Submit", class: "btn btn-primary" %>
+		<% end %>
+<br>
+<br>
+<br>
+
+	</div>
+</div>
+

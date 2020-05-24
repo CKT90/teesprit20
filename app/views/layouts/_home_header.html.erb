@@ -1,0 +1,46 @@
+<header class="head home_header">
+  <a href="#" class="header_icon"></a>
+		<%= link_to image_tag("logo1.png", alt: "tea Teesprit tee"), root_path, id: "logo"%>
+		<%= link_to "Teesprit", root_path, id: "logo_title" %>
+
+  	<nav class="menu">
+		<%= link_to "About Us", about_path, class: "underline"  %>
+		<%= link_to "Store", store_path, class: "underline"  %>
+		<%= link_to "Tee Details", details_path, class: "underline"  %>
+		<%= link_to "Contact Us", contact_path, class: "underline"  %>
+		<%= link_to 'Return Policy', refund_path, class: "underline" %>
+		
+		<div class = "right-side">
+		<% if logged_in? %>
+			<div class="dropdown">
+				<a href="#" class="dropbtn disable_link">Hi, <%= current_user.name %>!<span class="caret"></span></a>
+				<div class="dropdown-content">
+					<%= link_to "Orders/Profile", orders_path %>
+					<%= link_to "Help", contact_path, class: "help"%>
+					<%= link_to "Log out", logout_path, method: "delete", class: "disable_link" %>
+				</div>
+			</div>
+		<% else %>
+			<%= link_to "Sign Up!", signup_path, class: "underline"  %>
+			<%= link_to "Log in", login_path, class: "ghost-button-transition login_button" %>
+		<% end %>
+		</div>	
+	</nav>
+
+
+<div class="cart_drop"><i class="fa fa-shopping-cart fa-lg"></i>
+<div class="notification_number"><%= render partial: "layouts/notification_number" %></div>
+</div>
+
+<div class = "cart_box" style="display:none;">
+	<%= render 'layouts/header_cart' %>
+</div>
+
+
+</header>
+
+
+<div class="home_site">
+
+
+

@@ -1,0 +1,162 @@
+<% provide(:title, Order) %>
+
+<div class = "user_index_orders">
+  <div class="container">
+
+  <div class="col-lg-5 col-xs-12 user_edit">
+    <h1 ><i class="fa fa-id-card"></i> User Panel</h1>
+      <p class=" user_title"><%= @user.email %></p>
+      <%= render "shared/error_messages", :target => @user %>
+      <%= form_for @user, :method => :PUT do |f| %>
+
+      <%= f.label :name %><br>
+      <%= f.text_field :name, size: 40, class: 'form-control' %>
+
+      <%= f.label :contact_number, 'Contact Number' %><br>
+      <%= f.text_field :contact_number, size: 40, class: 'form-control' %>
+      
+      <%= f.label :address %><br>
+      <%= f.text_area :address, rows: 3, cols: 40, class: 'form-control' %>
+
+      <%= hidden_field_tag :cmd, "s-xclick" %>
+            <br>  
+      <p class="user_edit_bottom"><%= f.submit 'Update Profile', class:"user_edit_submit_button" %></p>
+
+  <% end %>
+</div>
+
+<div class="col-lg-7 col-xs-12 user_order">
+<h1 >My Orders <span> <%= link_to "Payment Method Details", payment_path, :class => "order_inquiry btn btn-warning", :style => "font-size: 0.33em !important;" %> </span></h1> 
+  <% if @orders.empty? %>
+  <p class="empty_order"> Your Order is Empty! Start shopping <%= link_to "HERE!", store_url, class: "here" %> </p>
+  <%= image_tag("norder.jpg", alt: "No order yet", :class => "no_order_pic")%>
+  <% else %>
+  <% @orders.each do |order| %>
+  <div class="order_index">
+  <div class="order_details">
+    <p style="color: #4498a0; font-weight:bold; line-height: 20px; margin:0px;"><span style="font-size: 1.5em;">#<%= order.number %></span></p>
+    <p class="info_tabs">
+    <%= link_to "Inquire this Order", contact_path(:content => "Hey, I would like to ask regarding this order number #{order.number}.", :subject => "Inquiry on order number #{order.number}.", :sender_email => current_user.email), :method => :get, :class => "order_inquiry btn btn-info" %>
+    </p>
+   
+
+    <p class="date">
+      <span style="border-bottom: 1px solid #cad0cf; line-height: 15px; padding-bottom: 5px;">Placed on 
+        <span style="font-weight: bold;"><%= order.created_at.to_date.to_s %></span>
+      </span>
+      <br>
+      <br>  
+      <span style="line-height: 15px;">
+        <span class="order_delivery">
+          <i style="color: #1e98b2;" class="fa fa-envelope" aria-hidden="true"></i> 
+          <%= order.pay_type %> (<%= number_to_currency(order.delivery_cost, unit: "RM") %>)
+        </span> 
+        &nbsp; 
+        <span class="order_location">
+          <i style="color: #1e98b2;" class="fa fa-location-arrow" aria-hidden="true"></i>
+          <%= order.states %>
+        </span>
+      </span>
+      <% if order.order_status_cd == 2 %>
+      <% else %>
+        <% if order.pay_type == "Paypal" %>
+          <p> <span style="color: #1e98b2; font-weight: bold;"> Paypal Transaction ID:</span> 
+            <% if order.paypal_transaction_id.nil? %>
+            Payment details not received, please proceed to payment <%= link_to "HERE", order_url(order), :style => "color:  #ff8c00; txt-decoration: underline;" %>
+            <% else %>
+              <%= order.paypal_transaction_id %> 
+            <% end %>
+          </p>
+        <% elsif order.pay_type == "Credit Card" %>
+          <p> <span style="color: #1e98b2; font-weight: bold;"> Stripe Transaction ID:</span> 
+            <% if order.stripe_transaction_id.nil? %>
+            Payment details not received, please proceed to payment <%= link_to "HERE", order_url(order), :style => "color:  #ff8c00; txt-decoration: underline;" %>
+            <% else %>
+              <%= order.stripe_transaction_id %> 
+            <% end %>
+          </p>
+        <% end %>
+      <% end %>
+    </p>
+    
+    <div class="order_list">
+      <table class="table">
+        <% order.line_items.each do |item| %>
+          <tr >
+            <td style = "width: 30%;" class="order_images">
+              <% if item.variant.images.any? %>
+                <%= image_tag(item.variant.images.first.image_url) %>
+              <% else %>
+                <% if @products.find(item.variant.product_id).images.any? %>
+                  <%= image_tag(@products.find(item.variant.product_id).images.first.image_url) %>
+                <% else %>
+                  <%= image_tag("img2.png", alt: "Upload Image Here!")%>
+                <%end%>
+              <%end%>             
+            </td>
+
+            <td class="second_column" style = "width: 70%; ">
+
+              <span class="item_title"><%=link_to @products.find(item.variant.product_id).title, product_path(@products.find(item.variant.product_id).number) %> </span>
+              <span class="option_types_cart" style="width: 100%;"><% item.variant.option_values.each do |cot| %> 
+                <ul style="list-style-type: none; padding: 0; margin:0;">
+                  <li> <%= cot.option_type.name %> <span style="font-weight:bold;"><%= cot.presentation %></span> </li>
+                </ul>
+              <%end%>
+              </span>
+              <span class="order_quantity"><%= number_to_currency(item.final_price, unit: "RM") %> &times; <%= item.quantity %> </span>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+
+  </div>
+  <div class="order_current_status">
+
+  <div class="ocs">
+  <p>Grand Total: <br> <span style="font-weight:bold"> <%= number_to_currency(order.grand_total_price, unit: "RM") %> </span></p>
+  </div>
+
+  <div class="ocs">
+  <span> Status: </span>
+  <div class="status_css" style="color: #fff">
+    <% if order.order_status_cd == 0 %> <!-- pending -->
+      <p style="background-color: #cad0cf; "><%=order.order_status %></p>
+    <% elsif order.order_status_cd == 1 %> <!-- approved -->
+      <p style="background-color: #90c5c7; "><%=order.order_status %></p>
+    <% elsif order.order_status_cd == 2 %> <!-- canceled -->
+      <p style="background-color: red; "><%=order.order_status %></p>
+    <% end %>
+  </div>
+  </div>
+
+  <div class="ocs">
+    <span> Shipping: </span>
+    <div class="status_css" style="color: #fff">
+    <% if order.shipment_status_cd == 0 %> <!-- pending -->
+      <p style="background-color: #cad0cf; "><%=order.shipment_status %></p>
+    <% elsif order.shipment_status_cd == 1 %> <!-- approved -->
+      <p style="background-color: #90c5c7; "><%=order.shipment_status %></p>
+    <% elsif order.shipment_status_cd == 2 %> <!-- canceled -->
+      <p style="background-color: red; "><%=order.shipment_status %></p>
+    <% end %>
+  </div>
+  </div>
+
+    
+  </div>
+  </div>
+  <% end %>
+<% end %>
+</div>
+
+</div>
+</div>
+
+
+  <script type="text/javascript">
+    $(document).on('turbolinks:load', function() {
+      $('div#footer').remove();
+    });
+  </script>

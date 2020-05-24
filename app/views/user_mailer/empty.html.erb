@@ -1,0 +1,13 @@
+<div style="text-align: center; font-family: calibri;">
+<h1>Teesprit Malaysia</h1>
+
+<p>
+Thanks for signing up! Click on the link below to activate your account:
+</p>
+
+<p style="color: #fff; "><%= link_to "Activate Account", edit_account_activation_url(@user.activation_token, email: @user.email), style: 'border: 2px solid #1e98b2; padding: 5px 10px 5px 10px; color: #1e98b2; text-decoration: none; font-size: 18px;'%></p>
+
+<p style="max-width: 450px; margin: auto;"> Teesprit</span> aims to produce locally designed graphic tee, and spread inspirations. Be different when wearing our tees. Follow us through social medias to keep updated on our progresses. We hope to spark like minded creative people and inspire all in our journey, as well as adding a little variation into the local apparel line. "Inspire Something" </p>
+
+<%= image_tag("https://res.cloudinary.com/dvmad09wh/image/upload/v1528133934/black-and-white-black-and-white-clothes-581339_hwg7o1.jpg", alt: "tee", style: "max-height: 200px; max-width: 100%;") %>
+</div>

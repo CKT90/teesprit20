@@ -1,0 +1,62 @@
+
+
+<h1 style="font-weight: bold; margin-bottom: 25px;">
+  All Products <%= link_to '<i class="fa fa-plus-circle"></i>'.html_safe, new_admin_product_path, title: "New Product", data: {toggle: 'tooltip', placement: "right" } %>
+</h1>
+
+<%= will_paginate %>
+<div class="clearfix"></div>
+
+<div class="cardboard">
+<table class="table product_table">
+  <thead>
+    <tr>
+      <th style="width: 15%;">SKU</th>
+      <th style="width: 15%;">Image</th>
+      <th style="width: 15%; text-decoration: underline;"><%= sort_link @search, :created_at, "Date Created" %></th>
+      <th style="width: 25%;">Title</th>
+      <th style="width: 15%;">Status</th>
+      <th style="width: 15%;">Options</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= link_to product.number.capitalize, [:edit, :admin, product] %></td>
+        
+        <td>
+          <% if product.images.any? %>
+            <%= image_tag product.images.first.image_url(:thumb) %>
+          <% else %>
+            <span style="background-color: #ff695a; width: 70px; color: #fff; padding: 5px; border-radius: 3px;"> No Image </span>
+          <%end%>
+        </td> 
+        
+        <td><%= product.created_at.strftime('%d %b %Y %H:%M') %></td>
+        <td><%= product.title %></td>
+        <td><%= product.state %></td>
+
+        <td class="glyph">
+          <%= link_to admin_product_variant_management_path(product), :method => :get, title: "Manage Variant", data: {toggle: 'tooltip', placement: "top" } do %>
+            <i class="btn btn-primary glyphicon glyphicon-duplicate"></i>
+          <% end %>
+          <%= link_to [:edit, :admin, product], title: "Edit Product", data: {toggle: 'tooltip', placement: "top" }  do %>
+            <i class="btn btn-success glyphicon glyphicon-book"></i>
+          <% end %>
+          <%= link_to admin_product_remove_path(product), :method => :put, title: "Remove", data: { confirm: 'Are you sure?', toggle: 'tooltip', placement: "top" } do %>
+            <i class="btn btn-danger glyphicon glyphicon-remove"></i>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    
+  </tbody>
+</table>
+</div>
+
+<%= will_paginate %>
+
+
+
+

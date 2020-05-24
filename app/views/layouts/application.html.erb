@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<title><%= full_title(yield(:title)) %></title>
+				<%= action_cable_meta_tag %>
+
+				<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+				<meta name="turbolinks-cache-control" content="no-cache">
+				<meta name="description" content="We design and sell local printed t-shirt apparels from local original art idea in Malaysia. All t-shirts are DTG printed at highest quality with 100% cotton made shirts, available with both men and women cuttings. We provide nationwide delivery within Malaysia.">
+				<meta name="viewport" content="width=device-width, initial-scale=1.0">
+				<html lang="en">
+				<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+				<%= javascript_pack_tag 'application' %>
+				<%= javascript_pack_tag 'app' %>
+				<%= csrf_meta_tags %>
+
+				<%= favicon_link_tag asset_path('teelogo.png') %>
+
+				<%= render 'layouts/shim' %>
+		</head>
+
+		<div class="site-container">
+ 			<div class="site-pusher">
+
+				<body class="<%= controller_name %> <%= action_name %>">
+				    <% if current_page?(root_path) %>
+	    				<%= render 'layouts/home_header' %>
+					<% else %>
+			    		<%= render 'layouts/header' %>
+					<% end %>
+
+	    			<div class="site-content">
+	      				<div class="flash_message">
+							<%= render 'shared/flash' %>
+						</div>
+							<%= yield %>	
+							<%= render 'layouts/footer' %>
+					</div> <!-- END site-content -->
+		    		
+		    		<div class="site-cache" id="site-cache"></div>
+		 			
+		 			</div> <!-- END header-->
+			
+				</body>
+			</div><!-- END site-pusher -->
+
+		</div> <!-- END site-container -->				
+	</html>
+
+

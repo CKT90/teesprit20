@@ -1,0 +1,63 @@
+// Place all the styles related to the Sessions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.login {
+	padding-top: 100px;
+	@include desktop {
+		padding-top: 50px;
+	}
+
+	.col-lg-5 {
+		border-right: 1px solid #000;
+		padding-bottom: 50px;
+		@include desktop {
+			border-right: 0px;
+		}
+	}
+
+	h1 {
+		text-align: center;
+		font-weight: bold;
+	}
+
+	#session_password {
+		margin-bottom: 5px;
+	}
+
+	.login_here {
+		width: 80%;
+		@include desktop {
+			width: 40%;
+			margin: auto;
+		}
+		@include mobile {
+			width: 80%;
+		}
+	}
+
+	.signin_button {
+		font-size: 1.2em;
+		margin-bottom: 10px;
+		font-weight: bold;
+	}
+
+	img.image_login {
+		height: 100%;
+		width: 100%;
+		@include desktop {
+			height: 60%;
+			width: 60%;
+			display: block;
+			margin: auto;
+		}
+		@include mobile {
+			height: 100%;
+			width: 100%;
+		}
+	}
+
+}
+
+
+
