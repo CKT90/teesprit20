@@ -72,7 +72,7 @@ end
 group :production do
 	gem 'pg'
 	gem 'rails_12factor', '0.0.2'
-	gem 'puma', '~> 3.4'
+	gem 'puma', '~> 5.6'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
